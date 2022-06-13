@@ -91,6 +91,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     };
     showYield();
     const [cardData, setCardData] = useState([]);
+    /*
     const getLokas = async () => {
         console.log("geting items " + items.length);
         //if (dataFetched) return;
@@ -115,12 +116,13 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
         return cards;
         //setLokaCards(items);
     };
+    */
     //console.log("current item " + items.length);
     //getLokas();
     //const cards=[];
-    if (!dataFetched) {
+    /* if (!dataFetched) {
         var cards = (async () => {
-            const cards = await getLokas();
+            //const cards = await getLokas();
             return cards;
         })();
 
@@ -129,9 +131,9 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
         if (!cardLoaded) {
             //console.log("card content " + cards)
         }
-    }
+    } */
 
-    const renderCards = () => {
+    /*const renderCards = () => {
         //console.log("trial " + cards);
         //items.push({ tokenId: 1, yield: 1 });
         //while (items.length <= 0) getLokas();
@@ -143,17 +145,17 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
         for (const [index, value] of listLokas.entries()) {
             cards[i] = <NFTCard key={1} tokenId={value[0]} yield={value[1]} />;
             i++;
-        }*/
+        }
         var yessir = [<NFTCard key={1} tokenId={5} yield={77} />, <NFTCard key={1} tokenId={5} yield={88} />];
         //return cards;
         var cards = (async () => {
-            const cards = await getLokas();
+            //const cards = await getLokas();
             return cards;
         })();
         return items.map((card) => {
             return <NFTCard key={card.tokenId} tokenId={card.tokenId} yield={card.yield} />;
         });
-    };
+    }; */
     //setAllCards(renderCards());
     //renderCards();
 
@@ -162,18 +164,18 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
         //getLokas();
         //console.log("getting lokas use effect " + items.length);
     }, [items.length]); // <-- empty dependency array
-
     if (!showConnectWallet && !showSwitchToDefaultNetwork) {
+        //if (true) {
         return (
             <div className="relative h-full w-full justify-center overflow-hidden lg:h-full">
                 <div className="relative z-10 m-auto flex w-screen flex-col items-center gap-8 py-[20px] px-4 text-center align-middle lg:py-10">
                     <h2 className="med-hero-text">
-                        Loka <span className="gradient move-gradient bg-[length:250%_250%] bg-clip-text text-transparent transition-none sm:py-20">Dashboard</span>
+                        Stonker <span className="gradient move-gradient bg-[length:250%_250%] bg-clip-text text-transparent transition-none sm:py-20">Dashboard</span>
                     </h2>
                     <div>
                         <div className="px-4 py-6 text-center sm:basis-1/4 sm:pl-8">
                             <p className="mb-6 text-sm leading-6 text-gray-light-10 dark:text-gray-dark-10">
-                                <div>You have</div> <span className="items-center justify-center text-4xl text-gray-light-12 dark:text-gray-dark-12">{0} ETH</span> <div>of dividend</div>
+                                <div>You have</div> <span className="items-center justify-center text-4xl text-gray-light-12 dark:text-gray-dark-12">241 USDC</span> <div>of dividend</div>
                                 <Link href="#">
                                     <a className="button gradient inline-block rounded-full bg-[length:300%_300%] bg-center py-3 px-8 font-inter text-sm font-bold leading-none tracking-tight text-gray-50 hover:bg-left  hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 dark:text-gray-900 sm:text-base md:text-base">Claim</a>
                                 </Link>
@@ -184,38 +186,45 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                             <div className="relative z-10 my-2  h-[100px] overflow-hidden rounded-2xl px-20 ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
                                     <div className="flex items-center justify-center text-3xl text-slate-50">
-                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">{workers.toString()} </span>
+                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">USDC 420</span>
                                     </div>
-                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Workers Online</div>
+                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Total Claimed</div>
                                 </div>
                             </div>
 
                             <div className="relative z-10 my-2  h-[100px] overflow-hidden rounded-2xl px-20  ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
                                     <div className="flex items-center justify-center text-3xl text-slate-50">
-                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">{averageHashrate.toFixed(2).toString()} GH/s</span>
+                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">1.45%</span>
                                     </div>
-                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">24h Hashrate</div>
+                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Your Farming Profit Ownership</div>
                                 </div>
                             </div>
 
                             <div className="relative z-10 my-2 h-[100px] overflow-hidden rounded-2xl px-20  ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
                                     <div className="flex items-center justify-center text-3xl text-slate-50">
-                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">{miningBalance.toFixed(2).toString()} ETH</span>
+                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">USDC 108</span>
                                     </div>
-                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">24h yield</div>
+                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">14 days yield</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="w-full px-10">
+                        {" "}
+                        <hr />
+                    </div>
+                    <h2 className="med-hero-text">
+                        Stonker <span className="gradient move-gradient bg-[length:250%_250%] bg-clip-text text-transparent transition-none sm:py-20">Treasury</span>
+                    </h2>
                     <div className="md:flex lg:flex ">
+                        {/*<NFTCard tokenId={0} yield={20} />
                         <NFTCard tokenId={0} yield={20} />
                         <NFTCard tokenId={0} yield={20} />
                         <NFTCard tokenId={0} yield={20} />
                         <NFTCard tokenId={0} yield={20} />
-                        <NFTCard tokenId={0} yield={20} />
-                        {renderCards()}
+                        {renderCards()} */}
                     </div>
                 </div>
             </div>

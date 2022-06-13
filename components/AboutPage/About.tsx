@@ -18,8 +18,8 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
     return (
         <div className="relative h-full w-full justify-center overflow-hidden px-4">
             <div className="relative z-20 m-auto flex  flex-col items-center gap-8 px-0 py-12 text-center align-middle lg:px-4 ">
-                <div className="flex items-center">
-                    <div className="w-full text-right">
+                <div className="flex items-center lg:px-20">
+                    <div className="w-full text-left">
                         <h1 className="sub-hero-text w-full p-0 py-4">
                             About <span className="gradient move-gradient w-full  bg-clip-text text-transparent transition-none">Stonker </span>
                             <hr />
@@ -37,13 +37,13 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                             </div>
                             <div className="pr-10 pt-5 text-left text-base leading-relaxed text-white">
                                 <h2 className="p-0 text-left text-base leading-relaxed text-white lg:pr-8 lg:pl-10">
-                                    <p>Aiming for 3-10% monthly profit by our farming team, Stonker is a yield farming NFT community project, limited only 8787 tokens</p>
-                                    <br />
+                                    <p>Aiming for 3-10% monthly profit by our team of experienced treasury farmers, Stonker is a yield farming NFT community project, limited only 8787 tokens</p>
                                     <p>"Stonker" name came from "Stonks" meme representing mixed feeling of optimism on the market</p>
                                     <br />
                                     <p>
                                         {" "}
-                                        The Treasury farming begins by using our own Infinium algorithmic trading robot and system. Public performance can be seen here :
+                                        The Treasury farming begins by using our own Infinium algorithmic trading robot and system. <br />
+                                        Infinium public performance can be seen here :
                                         <span className="gradient move-gradient bold w-full  bg-clip-text text-transparent transition-none">
                                             {" "}
                                             <a href="http://fxblue.com/users/infinium" target="blank_">
@@ -51,12 +51,11 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                                             </a>{" "}
                                         </span>
                                         <br />
-                                        Followed after by collaboration with DeFis, onchain web3 businesses, and eventually building StonkTank-DAO to invest on both onchain and offchain businesses
-                                        <br />
                                     </p>
                                     <br />
-                                    <br />
                                     As a brick and mortar business, our short term target is to return the holder's minting cost within 10-24 months, organically from treasury farming profit.
+                                    <br />
+                                    Followed after by collaboration with DeFis, onchain web3 businesses, and eventually building StonkTank-DAO to invest on both onchain and offchain businesses
                                 </h2>
                             </div>
                             <div className="hidden lg:block" style={{ justifyContent: "center", alignItems: "center" }}>
@@ -72,7 +71,7 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full pt-5 text-left">
+                <div className="w-full pt-5 text-right lg:px-20">
                     <h1 className="sub-hero-text w-full p-0">
                         The <span className="gradient move-gradient w-full  bg-clip-text text-transparent transition-none">Passing Light </span>:<br /> <span className="small-hero-text"> 4 Artworks with a twist in each NFT</span>
                     </h1>
@@ -132,6 +131,53 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                             <br />
                             <br />
                             The NFT is bound to 4 types of art, each representing Morning, Daylight, Twilight, and Night, combined with Smart Contract mechanism, the PFP will change depends on what time it is being accessed / looked at.
+                        </div>
+                    </div>
+                </div>
+                <div className="flex items-center lg:px-20">
+                    <div className="w-full text-left">
+                        <h1 className="sub-hero-text w-full p-0 py-4">
+                            Farming Strategy and <span className="gradient move-gradient w-full  bg-clip-text text-transparent transition-none">Infinium </span>
+                            <hr />
+                        </h1>
+                        <div className="lg:flex">
+                            <div className="lg:hidden" style={{ justifyContent: "center", alignItems: "center" }}>
+                                <div className="flex" style={{ justifyContent: "center", alignItems: "center" }}>
+                                    <div className="p-2">
+                                        <ReactRoundedImage image={"stonkusu.jpg"} roundedColor="#FFFFFF" imageWidth="160" imageHeight="160" roundedSize="5" borderRadius="20" />
+                                    </div>
+                                    <div className="p-2">
+                                        <ReactRoundedImage image={"android_stonk.jfif"} roundedColor="#FFFFFF" imageWidth="160" imageHeight="160" roundedSize="5" borderRadius="20" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="pr-10 pt-5 text-left text-base leading-relaxed text-white">
+                                <h2 className="p-0 text-left text-base leading-relaxed text-white lg:pr-8 lg:pl-10">
+                                    <p>Infinium, the system and algorithmic trading robot, has been developed and used since 2011.</p>
+                                    <br />
+                                    Back then, it was mainly used to trade on forex market, and eventually cryptocurrency.
+                                    <br />
+                                    It becomes the first strategy for Stonker to farm the treasury, targeting <span className="gradient move-gradient bold w-full  bg-clip-text text-transparent transition-none">3-10% profit per month</span>.
+                                    <br />
+                                    How infinium works can be checked
+                                    <span className="gradient move-gradient bold w-full  bg-clip-text text-transparent transition-none">
+                                        {" "}
+                                        <a href="https://vxyagr.gitbook.io/stonker/about/infinium" target="_blank">
+                                            here (click)
+                                        </a>
+                                    </span>
+                                </h2>
+                            </div>
+                            <div className="hidden lg:block" style={{ justifyContent: "center", alignItems: "center" }}>
+                                <div className="lg:flex " style={{ justifyContent: "center", alignItems: "center" }}>
+                                    <div className="p-2">
+                                        <ReactRoundedImage image={"stonkusu.jpg"} roundedColor="#FFFFFF" imageWidth="350" imageHeight="350" roundedSize="5" borderRadius="20" />
+                                    </div>
+                                    <div className="p-2">
+                                        <ReactRoundedImage image={"android_stonk.jfif"} roundedColor="#FFFFFF" imageWidth="350" imageHeight="350" roundedSize="5" borderRadius="20" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
