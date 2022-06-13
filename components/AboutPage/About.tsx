@@ -46,7 +46,7 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                                         Infinium public performance can be seen here :
                                         <span className="gradient move-gradient bold w-full  bg-clip-text text-transparent transition-none">
                                             {" "}
-                                            <a href="http://fxblue.com/users/infinium" target="blank_">
+                                            <a href="http://fxblue.com/users/infinium" target="blank_" rel="noreferrer">
                                                 http://fxblue.com/users/infinium{" "}
                                             </a>{" "}
                                         </span>
@@ -162,7 +162,7 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                                     How infinium works can be checked
                                     <span className="gradient move-gradient bold w-full  bg-clip-text text-transparent transition-none">
                                         {" "}
-                                        <a href="https://vxyagr.gitbook.io/stonker/about/infinium" target="_blank">
+                                        <a href="https://vxyagr.gitbook.io/stonker/about/infinium" target="_blank" rel="noreferrer">
                                             here (click)
                                         </a>
                                     </span>
