@@ -38,7 +38,7 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                             <div className="pr-10 pt-5 text-left text-base leading-relaxed text-white">
                                 <h2 className="p-0 text-left text-base leading-relaxed text-white lg:pr-8 lg:pl-10">
                                     <p>Aiming for 3-10% monthly profit by our team of experienced treasury farmers, Stonker is a yield farming NFT community project, limited only 8787 tokens</p>
-                                    <p>"Stonker" name came from "Stonks" meme representing mixed feeling of optimism on the market</p>
+                                    <p>&ldquo;Stonker&rdquo; name came from &ldquo;Stonks&rdquo; meme representing mixed feeling of optimism on the market</p>
                                     <br />
                                     <p>
                                         {" "}
@@ -53,7 +53,7 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                                         <br />
                                     </p>
                                     <br />
-                                    As a brick and mortar business, our short term target is to return the holder's minting cost within 10-24 months, organically from treasury farming profit.
+                                    As a brick and mortar business, our short term target is to return the holder&quot;s minting cost within 10-24 months, organically from treasury farming profit.
                                     <br />
                                     Followed after by collaboration with DeFis, onchain web3 businesses, and eventually building StonkTank-DAO to invest on both onchain and offchain businesses
                                 </h2>
@@ -119,7 +119,7 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
                             Everyone, either in the morning, daylight, twilight, and even at night, are anticipating the golden moment and chances offered by the market to win a better life. <br />
                             So many stories happened the market, about winning, losing, hope, dream, the past, the future, and so much more.
                             <br />
-                            Stonker NFT represent this continuous cycle with a mechanism called "The Passing Light", by changing the lighting based on the market hour
+                            Stonker NFT represent this continuous cycle with a mechanism called &ldquo;The Passing Light&rdquo;, by changing the lighting based on the market hour
                             <br />
                             <br />
                             <ul>
