@@ -17,7 +17,7 @@ const Resources: FunctionComponent<ResourcesProps> = ({}) => {
         <div className="fixed bottom-14 h-16 w-full px-4 lg:bottom-14 lg:right-8 lg:w-full lg:max-w-2xl lg:px-0">
             <div className="flex flex-row items-center rounded-lg p-1 sm:basis-2/3"></div>
 
-            <div className="flex flex-row items-center rounded-lg bg-violet-light-3 p-4 hover:bg-violet-light-4 dark:bg-violet-dark-2 hover:dark:bg-violet-dark-3 sm:basis-1/3" style={{ background: "linear-gradient(265.55deg, #030A1C 7.32%, #ED7C2E 35.62%, #F7F8FA 64.07%, #73ADB8 100.33%)" }}>
+            <div className="flex flex-row items-center rounded-lg bg-violet-light-3 p-4 hover:bg-violet-light-4 dark:bg-violet-dark-2 hover:dark:bg-violet-dark-3 sm:basis-1/3" style={{ backgroundImage: "url('private_sale_image.jpg')", background: "linear-gradient(265.43deg, #F7F8FA -6.9%, #73ADB8 66.53%)", border: "5px solid white", borderRadius: "5px!important" }}>
                 <img src="sample.jfif" width={60} height={60} />
                 <Link href="/mint">
                     <a className="">

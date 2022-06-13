@@ -16,6 +16,13 @@
     .med-hero-text {
         @apply m-0 max-w-xl text-center text-3xl font-bold tracking-tight text-gray-light-12 dark:text-gray-dark-12 sm:text-3xl md:text-4xl;
     }
+
+    .sub-hero-text {
+        @apply m-0 text-2xl font-bold tracking-tight text-gray-light-12 dark:text-gray-dark-12 sm:text-2xl md:text-3xl;
+    }
+    .small-hero-text {
+        @apply m-0 text-xl font-bold tracking-tight text-gray-light-12 dark:text-gray-dark-12 sm:text-xl md:text-2xl;
+    }
 }
 
 .mint_counter .mint_counter_sm {

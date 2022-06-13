@@ -26,7 +26,7 @@ const HomePage: FunctionComponent<HomePageProps> = ({}) => {
             <Head>
                 {/* <!-- HTML Meta Tags --> */}
                 <title>Stonker Trading Club</title>
-                <meta name="description" content="Finance as a service with a touch of art" />
+                <meta name="description" content="Trading and Treasury Farming as a service" />
                 <HomePageMeta />
             </Head>
             <Favicon />

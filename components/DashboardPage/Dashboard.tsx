@@ -51,7 +51,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     const Web3 = require("web3");
     //if (window.web3) {
 
-    var contractAbi = require("../../abis/LokaNFTABI.json");
+    var contractAbi = require("../../abis/StonkerNFTABI.json");
     const contractAddres = "0xaa015398ebD1f97cB7D887c5aC6dFaaD198E68Bf";
 
     // console.log(accountsList[0])

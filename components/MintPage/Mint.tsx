@@ -42,15 +42,15 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     const Web3 = require("web3");
     //if (window.web3) {
 
-    var contractAbi = require("../../abis/LokaNFTABI.json");
-    const contractAddres = "0xaa015398ebD1f97cB7D887c5aC6dFaaD198E68Bf";
+    var contractAbi = require("../../abis/StonkerNFTABI.json");
+    const contractAddres = "0x192de84cf8EDbd7a5F6Be6f76Bf74117c63780fb";
 
     // console.log(accountsList[0])
 
     // const provider = new providers.JsonRpcBatchProvider("https://rinkeby.infura.io/v3/8051d992532d4f65b1cea01cb751d577");
     const [species, setSpecies] = useState(0);
     const [quantity, setQuantity] = useState(1);
-    const [chosenImage, setChosenImage] = useState("species0.png");
+    const [chosenImage, setChosenImage] = useState("species0.jpg");
 
     const contract = new ethers.Contract(contractAddres, contractAbi, signer);
     const connection = contract.connect(contract.signer);
@@ -91,15 +91,15 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
         //console.log(dragon.toString());
         //await sleep(5000);
     };
-    const speciesText = ["Dragon | 2x yield effectivity | APR 30%", "Elf | 1.3x yield effectivity | APR 18%", "Dwarf | 1.1x yield effectivity | APR 15%", "Goblin | 1x yield effectivity | APR 15%"];
+    const speciesText = ["Android | 2x yield effectivity ", "Vampire | 1.6x yield effectivity ", "Elf | 1.3x yield effectivity ", "Human | 1x yield effectivity "];
 
-    const [nftText, setNfttext] = useState("Choose Loka Species");
+    const [nftText, setNfttext] = useState("Choose Stonker Species");
     const switchSpecies = async (speciesNumber: any) => {
         //getAvailable();
         setNfttext("Fetching onchain data...");
 
         setSpecies(speciesNumber);
-        setChosenImage("species" + speciesNumber + ".png");
+        setChosenImage("species" + speciesNumber + ".jpg");
         await getAvailable();
         await getPrices();
         var nftPrice_ = prices[speciesNumber] / 1000000000000000000;
@@ -144,19 +144,20 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
             await result.wait();
         }
     };
-    if (!showConnectWallet && !showSwitchToDefaultNetwork) {
+    //if (!showConnectWallet && !showSwitchToDefaultNetwork) {
+    if (true) {
         return (
             <div className="relative h-full w-full justify-center overflow-hidden lg:h-full">
                 <div className="relative z-10 m-auto flex max-w-screen-md flex-col items-center gap-8 py-[20px] px-4 text-center align-middle lg:py-10">
                     <h2 className="med-hero-text">
-                        Mint <span className="gradient move-gradient bg-[length:250%_250%] bg-clip-text text-transparent transition-none sm:py-20">Loka Miner</span>
+                        Mint <span className="gradient move-gradient bg-[length:250%_250%] bg-clip-text text-transparent transition-none sm:py-20">Stonker</span>
                     </h2>
                     <div className="flex items-center">
                         <div className="lg:hidden">
-                            <ReactRoundedImage image={chosenImage} roundedColor="#C1F6ED" imageWidth="180" imageHeight="180" roundedSize="13" borderRadius="1000" />
+                            <ReactRoundedImage image={chosenImage} roundedColor="#C1F6ED" imageWidth="180" imageHeight="180" roundedSize="13" borderRadius="40" />
                         </div>
                         <div className="hidden lg:flex">
-                            <ReactRoundedImage image={chosenImage} roundedColor="#C1F6ED" imageWidth="250" imageHeight="250" roundedSize="13" borderRadius="1000" />
+                            <ReactRoundedImage image={chosenImage} roundedColor="#C1F6ED" imageWidth="250" imageHeight="250" roundedSize="13" borderRadius="40" />
                         </div>
                     </div>
                     <div className=" w-full px-4 lg:right-8 lg:w-full lg:max-w-2xl lg:px-0">
@@ -167,49 +168,63 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                             onClick={() => {
                                 switchSpecies(0);
                             }}
-                            className="flex flex-row items-center p-2 text-center sm:basis-1/3"
+                            className="flex flex-row items-center p-1 text-center sm:basis-1/4"
                             style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}
                         >
                             <div className="lg:hidden">
-                                <ReactRoundedImage className="hidden items-center rounded-lg px-2 text-center sm:basis-1/4" image="species0.png" roundedColor="#C1F6ED" imageWidth="80" imageHeight="80" roundedSize="10" borderRadius="1000" />
+                                <ReactRoundedImage className="hidden items-center rounded-lg px-1 text-center sm:basis-1/4" image="species0.jpg" roundedColor="#C1F6ED" imageWidth="80" imageHeight="80" roundedSize="10" borderRadius="1000" />
                             </div>
                             <div className="hidden lg:flex">
-                                <ReactRoundedImage className="hidden flex-row items-center rounded-lg px-2 text-center sm:basis-1/4 lg:flex" image="species0.png" roundedColor="#C1F6ED" imageWidth="100" imageHeight="100" roundedSize="10" borderRadius="1000" />
+                                <ReactRoundedImage className="hidden flex-row items-center rounded-lg px-1 text-center sm:basis-1/4 lg:flex" image="species0.jpg" roundedColor="#C1F6ED" imageWidth="100" imageHeight="100" roundedSize="10" borderRadius="1000" />
                             </div>
                         </div>
                         <div
                             onClick={() => {
                                 switchSpecies(1);
                             }}
-                            className="flex flex-row items-center p-2 text-center sm:basis-1/3"
+                            className="flex flex-row items-center p-1 text-center sm:basis-1/4"
                             style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}
                         >
                             <div className="lg:hidden">
-                                <ReactRoundedImage className="hidden items-center rounded-lg px-2 text-center sm:basis-1/4" image="species1.png" roundedColor="#C1F6ED" imageWidth="80" imageHeight="80" roundedSize="10" borderRadius="1000" />
+                                <ReactRoundedImage className="hidden items-center rounded-lg px-1 text-center sm:basis-1/4" image="species1.jpg" roundedColor="#C1F6ED" imageWidth="80" imageHeight="80" roundedSize="10" borderRadius="1000" />
                             </div>
                             <div className="hidden lg:flex">
-                                <ReactRoundedImage className="hidden flex-row items-center rounded-lg px-2 text-center sm:basis-1/4 lg:flex" image="species1.png" roundedColor="#C1F6ED" imageWidth="100" imageHeight="100" roundedSize="10" borderRadius="1000" />
+                                <ReactRoundedImage className="hidden flex-row items-center rounded-lg px-1 text-center sm:basis-1/4 lg:flex" image="species1.jpg" roundedColor="#C1F6ED" imageWidth="100" imageHeight="100" roundedSize="10" borderRadius="1000" />
+                            </div>
+                        </div>
+                        <div
+                            onClick={() => {
+                                switchSpecies(2);
+                            }}
+                            className="flex flex-row items-center p-1 text-center sm:basis-1/4"
+                            style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}
+                        >
+                            <div className="lg:hidden">
+                                <ReactRoundedImage className="hidden items-center rounded-lg px-1 text-center sm:basis-1/4" image="species2.jpg" roundedColor="#C1F6ED" imageWidth="80" imageHeight="80" roundedSize="10" borderRadius="1000" />
+                            </div>
+                            <div className="hidden lg:flex">
+                                <ReactRoundedImage className="hidden flex-row items-center rounded-lg px-1 text-center sm:basis-1/4 lg:flex" image="species2.jpg" roundedColor="#C1F6ED" imageWidth="100" imageHeight="100" roundedSize="10" borderRadius="1000" />
                             </div>
                         </div>
                         <div
                             onClick={() => {
                                 switchSpecies(3);
                             }}
-                            className="flex flex-row items-center p-2 text-center sm:basis-1/3"
+                            className="flex flex-row items-center p-2 text-center sm:basis-1/4"
                             style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}
                         >
                             <div className="lg:hidden">
-                                <ReactRoundedImage className="hidden items-center rounded-lg px-2 text-center sm:basis-1/4" image="species3.png" roundedColor="#C1F6ED" imageWidth="80" imageHeight="80" roundedSize="10" borderRadius="1000" />
+                                <ReactRoundedImage className="hidden items-center rounded-lg px-2 text-center sm:basis-1/4" image="species3.jpg" roundedColor="#C1F6ED" imageWidth="80" imageHeight="80" roundedSize="10" borderRadius="1000" />
                             </div>
                             <div className="hidden lg:flex">
-                                <ReactRoundedImage className="hidden flex-row items-center rounded-lg px-2 text-center sm:basis-1/4 lg:flex" image="species3.png" roundedColor="#C1F6ED" imageWidth="100" imageHeight="100" roundedSize="10" borderRadius="1000" />
+                                <ReactRoundedImage className="hidden flex-row items-center rounded-lg px-2 text-center sm:basis-1/4 lg:flex" image="species3.jpg" roundedColor="#C1F6ED" imageWidth="100" imageHeight="100" roundedSize="10" borderRadius="1000" />
                             </div>
                         </div>
                     </div>
                     <div className="flex w-full text-center align-middle" style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}>
                         <div
                             style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}
-                            className="h-[100px] w-[100px]"
+                            className="h-[80px] w-[100px]"
                             onClick={() => {
                                 var num = amount - 1;
                                 adjustAmount(num);
@@ -219,10 +234,10 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                                 <img src="/minusIcon.svg" alt="-" width="30px" />
                             </button>
                         </div>
-                        <div className="mint_number h-[100px] w-[100px]" style={{ color: "#fff", fontSize: "46px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="mint_number h-[80px] w-[100px]" style={{ color: "#fff", fontSize: "46px", display: "flex", justifyContent: "center", alignItems: "center" }}>
                             {amount}
                         </div>
-                        <div style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }} className="h-[100px] w-[100px]">
+                        <div style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }} className="h-[80px] w-[100px]">
                             <button
                                 className="px-4"
                                 onClick={() => {

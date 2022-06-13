@@ -72,7 +72,7 @@ const Navigation: FunctionComponent<NavigationProps> = ({}) => {
                     <ButtonConnectWalletMobile />
                 </div>
 
-                <div className="flex p-4 md:w-[162.8px] lg:flex">
+                <div className="h-16 w-[162.8px] flex-none cursor-pointer p-4">
                     <Link href="/">
                         <p className="hidden items-center lg:flex ">
                             <Logo />

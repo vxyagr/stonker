@@ -16,8 +16,8 @@ type HeroProps = {};
 const Hero: FunctionComponent<HeroProps> = ({}) => {
     return (
         <div className="relative h-full w-full justify-center overflow-hidden">
-            <img src="smal_bg.jpg" className="w-full lg:hidden" />
-            <img src="stonker_landing.jpg" className="absolute top-0 left-0 hidden w-full min-w-[1200px] md:hidden lg:flex" />
+            <img src="stonker_morning.jpg" className="w-full lg:hidden" />
+            <img src="stonker_hero.jpg" className="absolute top-0 left-0 hidden w-full min-w-[1200px] md:hidden lg:flex" />
             <div className="relative z-20 m-auto flex hidden  max-w-screen-md flex-col items-center gap-8 px-4 py-32 text-center align-middle ">
                 <div className="flex  items-center">
                     <h1 className="hero-text">
