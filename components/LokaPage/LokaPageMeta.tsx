@@ -15,18 +15,18 @@ const LokaPageMeta: FunctionComponent<LokaPageMetaProps> = ({}) => {
     return (
         <>
             {/* <!-- Facebook Meta Tags --> */}
-            <meta property="og:url" content="https://loka-interface.vercel.apps/" />
+            <meta property="og:url" content="https://stonker.club/" />
             <meta property="og:type" content="website" />
-            <meta property="og:title" content="Loka Mining" />
-            <meta property="og:description" content="Crypto mining with green and renewable energy" />
-            <meta property="og:image" content="" />
+            <meta property="og:title" content="Stonker Trading Club" />
+            <meta property="og:description" content="A simple way to invest on treasury management with NFT as ownership and tradeable token" />
+            <meta property="og:image" content="https://stonker.club/stonker_preview.png" />
 
             {/* <!-- Twitter Meta Tags --> */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta property="twitter:domain" content="lokaverse.io" />
-            <meta property="twitter:url" content="https://lokaverse.io/" />
-            <meta name="twitter:title" content="Loka Mining" />
-            <meta name="twitter:description" content="Crypto mining with green and renewable energy" />
+            <meta property="twitter:domain" content="stonker.club" />
+            <meta property="twitter:url" content="https://twitter.com/stonkerclub" />
+            <meta name="twitter:title" content="Stonker Trading Club" />
+            <meta name="twitter:description" content="A simple way to invest on treasury management with NFT as ownership and tradeable token" />
             <meta name="twitter:image" content="" />
         </>
     );
