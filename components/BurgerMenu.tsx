@@ -36,11 +36,11 @@ const BurgerMenu = ({ open }: { open: any }) => {
     return (
         //<div className='{"background":"linear-gradient(89.93deg, #0A2F0C 27.17%, #295771 76.4%, #0A2F0C 99.83%)"} sticky  top-0 z-40 flex flex-row items-center justify-between bg-green-300 p-4 backdrop-blur-lg dark:bg-green-700 '>
         <>
-            <div className="pointer z-100 will-change-opacity fixed absolute left-0 top-16 ml-0 flex h-screen w-screen flex-col items-start overflow-scroll bg-white bg-opacity-90 px-6 pt-20 backdrop-blur-3xl" data-projection-id={12} style={{ opacity: 1 }}>
+            <div className="lg pointer pt-15 fixed  absolute sticky top-[80px] left-0 z-40 ml-0 flex h-screen w-screen flex-col items-start overflow-scroll bg-white bg-opacity-90 px-6 backdrop-blur" data-projection-id={12} style={{ opacity: 1, cursor: "pointer" }}>
                 <ul className="font-900 w-full text-xl uppercase">
                     <li className=" border-b border-black border-opacity-10">
-                        <Link href="/">
-                            <p className="relative block flex w-full items-center py-3 text-black">HOME </p>
+                        <Link href="/mint">
+                            <p className="relative block flex w-full items-center py-3 text-black">BUY </p>
                         </Link>
                     </li>
                     <li className=" border-b border-black border-opacity-10">
@@ -48,11 +48,7 @@ const BurgerMenu = ({ open }: { open: any }) => {
                             <p className="relative block flex w-full items-center py-3 text-black">DASHBOARD </p>
                         </Link>
                     </li>
-                    <li className=" border-b border-black border-opacity-10">
-                        <Link href="/mint">
-                            <p className="relative block flex w-full items-center py-3 text-black">BUY </p>
-                        </Link>
-                    </li>
+
                     <li className=" border-b border-black border-opacity-10">
                         <Link href="/about">
                             <p className="relative block flex w-full items-center py-3 text-black">ABOUT </p>
@@ -60,13 +56,13 @@ const BurgerMenu = ({ open }: { open: any }) => {
                     </li>
 
                     <li className=" border-b border-black border-opacity-10">
-                        <Link href="https://talkinandy.gitbook.io/loka/getting-started/overview">
+                        <Link href="https://vxyagr.gitbook.io/stonker">
                             <p className="relative block flex w-full items-center py-3 text-black">DOCS </p>
                         </Link>
                     </li>
 
                     <li className=" border-b border-black border-opacity-10">
-                        <Link href="https://twitter.com/lokaversenft">
+                        <Link href="https://twitter.com/stonkerclub">
                             <p className="relative block flex w-full items-center py-3 text-black">
                                 twitter{" "}
                                 <svg xmlns="http://www.w3.org/2000/svg" className="ml-auto h-4 w-4 fill-current stroke-current" viewBox="0 0 40 40">
@@ -76,7 +72,7 @@ const BurgerMenu = ({ open }: { open: any }) => {
                         </Link>
                     </li>
                     <li className=" border-b border-black border-opacity-10">
-                        <Link href="https://www.instagram.com/lokaversenft/">
+                        <Link href="https://www.instagram.com/stonkerclub/">
                             <p className="relative block flex w-full items-center py-3 text-black">
                                 instagram{" "}
                                 <svg xmlns="http://www.w3.org/2000/svg" className="ml-auto h-4 w-4 fill-current stroke-current" viewBox="0 0 40 40">
@@ -96,7 +92,7 @@ const BurgerMenu = ({ open }: { open: any }) => {
                         </Link>
                     </li>
                 </ul>
-                <p className="text-2xs mt-6 pb-4 text-left font-mono uppercase opacity-80">Loka Labs © 2022</p>
+                <p className="text-2xs mt-6 pb-4 text-left font-mono uppercase opacity-80">Vøyagr © 2022</p>
             </div>
         </>
     );
