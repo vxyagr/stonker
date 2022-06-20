@@ -166,6 +166,8 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                 setMintedAmount(amount);
                 setShowSuccess(true);
             } catch (error) {
+                /* var er: JSON;
+                er = error;
                 console.log("error : " + error.code.toString());
                 var message = "";
                 switch (error.code.toString()) {
@@ -177,9 +179,9 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                         break;
                     default:
                         setErrorMessage("Transaction Failed");
-                }
+                } */
                 //setErrorMessage(error.message.toString());
-                //setErrorMessage("Transaction Failed, can be of insufficient fund");
+                setErrorMessage("Minting Failed");
                 setError(true);
             }
         }
@@ -189,15 +191,21 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
         return (
             <div className="relative h-full w-full justify-center overflow-hidden lg:h-full">
                 {error ? (
-                    <div
-                        onClick={() => {
-                            closeError();
-                        }}
-                        className="absolute top-[80px] z-50 m-0 flex h-screen w-full flex-shrink-0 flex-col backdrop-blur "
-                        style={{ justifyContent: "top", alignItems: "center" }}
-                    >
+                    <div className="absolute top-[80px] z-50 m-0 flex h-screen w-full flex-shrink-0 flex-col backdrop-blur " style={{ justifyContent: "top", alignItems: "center" }}>
                         <div className="mt-[100px] h-[300px] w-[300px] rounded-lg bg-white p-6" style={{ justifyContent: "center", alignItems: "center" }}>
-                            <a href="#">Oops! {errorMessage.toString()}</a>
+                            <div className="h-[100px] pt-[40px] text-center">
+                                <a href="#">Oops! {errorMessage.toString()}</a>
+                            </div>
+                            <div className="bottom-[20px] text-center">
+                                <a
+                                    onClick={() => {
+                                        closeError();
+                                    }}
+                                    href="#"
+                                >
+                                    <ButtonPositive>Close</ButtonPositive>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 ) : (
