@@ -78,40 +78,42 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     const [cardData, setCardData] = useState([]);
 
     const getOwned = async () => {
-        var owned = await contract.stonkersOfOwner(account);
-        //console.log(owned);
-        for (const [index, value] of owned.entries()) {
-            var card_: ICard = { tokenId: 0, yield: 0 };
-            card_.tokenId = value[0];
-            var yieldEffectivity = value[1].toString();
-            card_.yield = value[1];
-            items.push(card_);
-            switch (yieldEffectivity) {
-                case "20":
-                    availableSpecies[0]++;
-                    break;
-                case "16":
-                    availableSpecies[1]++;
-                    break;
-                case "13":
-                    availableSpecies[2]++;
-                    break;
-                case "10":
-                    availableSpecies[3]++;
-                    break;
+        if (account) {
+            var owned = await contract.stonkersOfOwner(account);
+            //console.log(owned);
+            for (const [index, value] of owned.entries()) {
+                var card_: ICard = { tokenId: 0, yield: 0 };
+                card_.tokenId = value[0];
+                var yieldEffectivity = value[1].toString();
+                card_.yield = value[1];
+                items.push(card_);
+                switch (yieldEffectivity) {
+                    case "20":
+                        availableSpecies[0]++;
+                        break;
+                    case "16":
+                        availableSpecies[1]++;
+                        break;
+                    case "13":
+                        availableSpecies[2]++;
+                        break;
+                    case "10":
+                        availableSpecies[3]++;
+                        break;
+                }
             }
-        }
-        setHuman(availableSpecies[3]);
-        setElf(availableSpecies[2]);
-        setVampire(availableSpecies[1]);
-        setAndroid(availableSpecies[0]);
-        var ownedPercent = ((1 * human + 1.3 * elf + 1.6 * vampire + 2 * android) / totalStonkerYield) * 100;
-        setOwnerPercent(ownedPercent);
-        if (ownedPercent > 0) setZeroStonker(false);
-        /*availableSpecies[0] = await contract.getAvailableSpecies(0);
+            setHuman(availableSpecies[3]);
+            setElf(availableSpecies[2]);
+            setVampire(availableSpecies[1]);
+            setAndroid(availableSpecies[0]);
+            var ownedPercent = ((1 * human + 1.3 * elf + 1.6 * vampire + 2 * android) / totalStonkerYield) * 100;
+            setOwnerPercent(ownedPercent);
+            if (ownedPercent > 0) setZeroStonker(false);
+            /*availableSpecies[0] = await contract.getAvailableSpecies(0);
         availableSpecies[1] = await contract.getAvailableSpecies(1);
         availableSpecies[2] = await contract.getAvailableSpecies(2);
         availableSpecies[3] = await contract.getAvailableSpecies(3); */
+        }
     };
 
     getOwned();

@@ -68,18 +68,22 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     prices[1] = 225;
 
     const getAvailable = async () => {
-        availableSpecies[0] = await contract.getAvailableSpecies(0);
-        availableSpecies[1] = await contract.getAvailableSpecies(1);
-        availableSpecies[2] = await contract.getAvailableSpecies(2);
-        availableSpecies[3] = await contract.getAvailableSpecies(3);
+        if (account) {
+            availableSpecies[0] = await contract.getAvailableSpecies(0);
+            availableSpecies[1] = await contract.getAvailableSpecies(1);
+            availableSpecies[2] = await contract.getAvailableSpecies(2);
+            availableSpecies[3] = await contract.getAvailableSpecies(3);
+        }
     };
 
     var result1;
     const getPrices = async () => {
-        prices[0] = await contract.getPrice(0);
-        prices[1] = await contract.getPrice(1);
-        prices[2] = await contract.getPrice(2);
-        prices[3] = await contract.getPrice(3);
+        if (account) {
+            prices[0] = await contract.getPrice(0);
+            prices[1] = await contract.getPrice(1);
+            prices[2] = await contract.getPrice(2);
+            prices[3] = await contract.getPrice(3);
+        }
         // prices[0] = parseInt(result1);
 
         //setIsMinted(result);
@@ -152,21 +156,22 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
         switchSpecies(species);
     };
     const mintToken = async () => {
-        if (totalPrice > 0) {
-            //console.log("MINTING " + species + " sejumlah " + amount);
-            const addr = account;
-            try {
-                const result = await contract.mintStonker(amount, species, 2, {
-                    value: ethers.utils.parseEther(totalPrice.toString()),
-                });
+        if (account) {
+            if (totalPrice > 0) {
+                //console.log("MINTING " + species + " sejumlah " + amount);
+                const addr = account;
+                try {
+                    const result = await contract.mintStonker(amount, species, 2, {
+                        value: ethers.utils.parseEther(totalPrice.toString()),
+                    });
 
-                console.log(result.hash);
-                //setHashAddress("https://etherscan.io/tx/" + result.hash.toString());
-                setHashAddress("https://rinkeby.etherscan.io/tx/" + result.hash.toString());
-                setMintedAmount(amount);
-                setShowSuccess(true);
-            } catch (error) {
-                /* var er: JSON;
+                    console.log(result.hash);
+                    //setHashAddress("https://etherscan.io/tx/" + result.hash.toString());
+                    setHashAddress("https://rinkeby.etherscan.io/tx/" + result.hash.toString());
+                    setMintedAmount(amount);
+                    setShowSuccess(true);
+                } catch (error) {
+                    /* var er: JSON;
                 er = error;
                 console.log("error : " + error.code.toString());
                 var message = "";
@@ -180,9 +185,10 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                     default:
                         setErrorMessage("Transaction Failed");
                 } */
-                //setErrorMessage(error.message.toString());
-                setErrorMessage("Minting Failed");
-                setError(true);
+                    //setErrorMessage(error.message.toString());
+                    setErrorMessage("Minting Failed");
+                    setError(true);
+                }
             }
         }
     };
