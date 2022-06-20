@@ -34,8 +34,8 @@ export const WCConnector = new WalletConnectConnector({
 
 export const ArbitrumOneProvider = new providers.JsonRpcProvider("https://arb-mainnet.g.alchemy.com/v2/qu4tZ0JUekqqwtcDowbfel-s4S8Z60Oj", Chains.arbitrumOne.id);
 export const KovanProvider = new providers.JsonRpcProvider("https://eth-kovan.alchemyapi.io/v2/qLbNN95iUDTpQqbm5FzgaSPrPJ908VD-", Chains.kovan.id);
-export const RinkebyProvider = new providers.JsonRpcBatchProvider("https://rinkeby.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a", Chains.rinkeby.id);
-export const MainnetProvider = new providers.JsonRpcBatchProvider("https://mainnet.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a", Chains.mainnet.id);
+export const RinkebyProvider = new providers.JsonRpcBatchProvider("https://rinkeby.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a");
+export const MainnetProvider = new providers.JsonRpcBatchProvider("https://mainnet.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a");
 export type WalletStates = {
     account: string | undefined;
     chain: { unsupported: Boolean; chain: Chain };
