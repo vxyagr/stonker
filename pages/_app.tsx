@@ -5,7 +5,7 @@ import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 
-function LokaApp({ Component, pageProps }: AppProps) {
+function StonkerApp({ Component, pageProps }: AppProps) {
     return (
         <Wallet>
             <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
@@ -13,4 +13,4 @@ function LokaApp({ Component, pageProps }: AppProps) {
         </Wallet>
     );
 }
-export default LokaApp;
+export default StonkerApp;

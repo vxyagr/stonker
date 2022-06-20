@@ -64,7 +64,6 @@ const ButtonConnectWalletDesktop: FunctionComponent<ButtonConnectWalletDesktopPr
     const connect = async function (c: InjectedConnector | WalletConnectConnector) {
         setIsConnecting(true);
         setConnectorName(c.name);
-
         const result = await connectWallet(c);
 
         // Handle the error
@@ -106,6 +105,7 @@ const ButtonConnectWalletDesktop: FunctionComponent<ButtonConnectWalletDesktopPr
                                 className={`m-0 flex w-full flex-row items-center justify-between rounded-[12px] border border-orange-light-5 bg-orange-light-2 py-[11px] px-[12px] text-left transition duration-300 ease-in-out hover:bg-orange-light-3 active:scale-95 dark:border-orange-dark-5 dark:bg-orange-dark-2 dark:hover:bg-orange-dark-3 ${isConnecting && connectorName ? "cursor-wait" : "cursor-pointer"}`}
                                 disabled={isConnecting && connectorName ? true : false}
                                 onClick={async () => {
+                                    disconnectWallet();
                                     await connect(MetaMaskConnector);
                                 }}
                             >
@@ -148,7 +148,7 @@ const ButtonConnectWalletDesktop: FunctionComponent<ButtonConnectWalletDesktopPr
 
                         <div className="m-0 border-t border-dashed border-gray-light-3 p-4 text-center dark:border-gray-dark-3">
                             <p className="leading-1 text-xs text-gray-light-11 dark:text-gray-dark-11">
-                                By connecting your wallet to Loka you&apos;re agree with our{" "}
+                                By connecting your wallet to Stonker you&apos;re agree with our{" "}
                                 <a href="#" className="text-gray-light-12 underline dark:text-gray-dark-12" target="_blank" rel="noreferrer">
                                     Terms and Conditions
                                 </a>

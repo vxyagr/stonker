@@ -6,7 +6,7 @@ import { ethers, providers } from "ethers";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
-export const connectorStorageKey = "lokaConnectors.wallet";
+export const connectorStorageKey = "stonkerConnectors.wallet";
 
 //export const supportedChains = [Chains.rinkeby, Chains.mainnet, Chains.kovan];
 export const supportedChains = [Chains.rinkeby];
@@ -97,9 +97,13 @@ const WalletGlobalState: FunctionComponent<WalletGlobalStateProps> = ({ children
     // Connect wallet
     const connectWallet = async function (c: InjectedConnector | WalletConnectConnector) {
         try {
+            disconnect();
             const result = await connect(c);
-            if (result && result.error) return result; // Return error early
-
+            if (result && result.error) {
+                disconnect();
+                console.log(result);
+                return result;
+            } // Return error early
             // Persist metamask connection state
             if (c.name === "MetaMask") {
                 setMetamaskState(MetamaskState.Connected);
@@ -118,6 +122,7 @@ const WalletGlobalState: FunctionComponent<WalletGlobalStateProps> = ({ children
                 // Reload the page
                 window.location.reload(); // IMPORTANT: Somehow wallectconnect signer connected to mainnet by default, fixed by reloading the page
             }
+            console.log(result);
             return result;
         } catch (e) {
             console.error("Cannot connect");
@@ -130,6 +135,7 @@ const WalletGlobalState: FunctionComponent<WalletGlobalStateProps> = ({ children
         // Persist data in Metamask
         if (accountData.data?.connector?.name === "MetaMask") {
             setMetamaskState(MetamaskState.NotConnected);
+            console.log(metamaskState);
         }
         // Run the disconnect; esp for wallet connect
         disconnect();

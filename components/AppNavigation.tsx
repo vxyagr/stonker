@@ -73,7 +73,7 @@ const Navigation: FunctionComponent<NavigationProps> = ({}) => {
                 </div>
                 <div className="hidden h-[60px] w-[162.8px] flex-none cursor-pointer items-center p-4 lg:flex">
                     <Link href="/">
-                        <p className="hidden items-center lg:flex ">
+                        <p className="hidden items-center lg:flex " style={{ cursor: "pointer" }}>
                             <Logo />
                         </p>
                     </Link>
