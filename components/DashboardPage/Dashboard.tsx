@@ -52,7 +52,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //if (window.web3) {
 
     var contractAbi = require("../../abis/StonkerNFTABI.json");
-    const contractAddres = "0xf31ccb4A5A41b1c502bB82584d39B981Df50Da74";
+    const contractAddres = "0x68E47e2796B5E581Bd1233227AecCc2d5491d0cf";
 
     // console.log(accountsList[0])
 
