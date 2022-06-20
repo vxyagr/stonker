@@ -62,7 +62,7 @@ enum MetamaskState {
     Connected,
     NotConnected,
 }
-const useMatamaskState = createPersistedState("loka.metamaskState"); // Persist disconnect state on metamask
+const useMatamaskState = createPersistedState("stonker.metamaskState"); // Persist disconnect state on metamask
 
 type WalletGlobalStateProps = {
     children: ReactNode;
