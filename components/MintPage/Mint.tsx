@@ -11,6 +11,10 @@ import ButtonConnectWalletDesktop from "../Buttons/ConnectWalletDesktop";
 import { DEFAULT_CHAIN, RinkebyProvider, useWalletContext } from "../Wallet";
 import { ethers, providers } from "ethers";
 import React, { useState, useEffect } from "react";
+import MintSuccessCard from "./MintSuccessCard";
+import MintErrorCard from "./MintErrorCard";
+import ButtonClose from "../Buttons/Close";
+import ButtonPositive from "../Buttons/ButtonPositive";
 /**
  * HeroProps is a React Component properties that passed to React Component Hero
  */
@@ -35,7 +39,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //setIsConnected(props.accountConnected);
 
     // Read data from Snapshot API
-    const marketsResponse = useMarkets(chain.unsupported ? DEFAULT_CHAIN.id : chain.chain.id);
+    //const marketsResponse = useMarkets(chain.unsupported ? DEFAULT_CHAIN.id : chain.chain.id);
 
     // UI states
 
@@ -43,26 +47,24 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //if (window.web3) {
 
     var contractAbi = require("../../abis/StonkerNFTABI.json");
-    const contractAddres = "0x192de84cf8EDbd7a5F6Be6f76Bf74117c63780fb";
+    const contractAddres = "0xf31ccb4A5A41b1c502bB82584d39B981Df50Da74";
 
     // console.log(accountsList[0])
 
     // const provider = new providers.JsonRpcBatchProvider("https://rinkeby.infura.io/v3/8051d992532d4f65b1cea01cb751d577");
     const [species, setSpecies] = useState(0);
-    const [quantity, setQuantity] = useState(1);
+    const [error, setError] = useState(false);
     const [chosenImage, setChosenImage] = useState("species0.jpg");
 
     const contract = new ethers.Contract(contractAddres, contractAbi, signer);
-    const connection = contract.connect(contract.signer);
-    const [dragon, setDragon] = useState(0);
-    const [elf, setElf] = useState(0);
-    const [dwarf, setDwarf] = useState(0);
-    const [goblin, setGoblin] = useState(0);
+    const speciesNames = ["Android", "Vampire", "Elf", "Human"];
     const [walletConnected, setWalletConnected] = useState(false);
     const prices = [10, 120, 10, 10];
     const [nftPrice, setNftPrice] = useState(0);
     const [avail, setAvail] = useState(0);
     const [amount, setAmount] = useState(0);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     prices[1] = 225;
 
     const getAvailable = async () => {
@@ -85,19 +87,20 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //getPrices();
     //getAvailable();
     //await sleep(5000);
-
+    const [mintedAmount, setMintedAmount] = useState(0);
     const refreshData = async () => {
         //getAvailable();
         //console.log(dragon.toString());
         //await sleep(5000);
     };
     const speciesText = ["Android | 2x yield effectivity ", "Vampire | 1.6x yield effectivity ", "Elf | 1.3x yield effectivity ", "Human | 1x yield effectivity "];
-
+    const [fetching, setFetching] = useState(false);
     const [nftText, setNfttext] = useState("Choose Stonker Species");
+    const [hashAddress, setHashAddress] = useState("");
     const switchSpecies = async (speciesNumber: any) => {
         //getAvailable();
         setNfttext("Fetching onchain data...");
-
+        setFetching(true);
         setSpecies(speciesNumber);
         setChosenImage("species" + speciesNumber + ".jpg");
         await getAvailable();
@@ -111,21 +114,23 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
         var txt2_ = speciesText[speciesNumber] + " | " + avail + " left | " + nftPrice + " ETH";
 
         setNfttext(txt_);
+        setFetching(false);
     };
     const [totalPrice, setTotalPrice] = useState(0);
     const adjustAmount = async (amountNumber: number) => {
         if (amountNumber >= 0) {
             setAmount(amountNumber);
+
             var total_ = amountNumber * nftPrice;
             setTotalPrice(total_);
-            console.log(totalPrice.toString());
+            // console.log(totalPrice.toString());
         }
     };
 
     useEffect(() => {
         // this hook will get called everytime when myArr has changed
         // perform some action which will get fired everytime when myArr gets updated
-        console.log("Updated State", totalPrice);
+        //console.log("Updated State", totalPrice);
     }, [totalPrice]);
 
     //refreshData();
@@ -134,22 +139,102 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //setTimeout(5000);
     //const delay = (ms) => new Promise((res) => setTimeout(res, ms));
     //await setTimeout(5000);
+
+    const closeError = () => {
+        console.log("clicked");
+        setError(false);
+        switchSpecies(species);
+    };
+
+    const closeSuccessNotification = () => {
+        console.log("clicked");
+        setShowSuccess(false);
+        switchSpecies(species);
+    };
     const mintToken = async () => {
         if (totalPrice > 0) {
-            console.log("MINTING " + species + " sejumlah " + amount);
+            //console.log("MINTING " + species + " sejumlah " + amount);
             const addr = account;
-            const result = await contract.mintStonker(amount, species, 2, {
-                value: ethers.utils.parseEther(totalPrice.toString()),
-            });
-            await result.wait();
-            console.log(result);
-            switchSpecies(species);
+            try {
+                const result = await contract.mintStonker(amount, species, 2, {
+                    value: ethers.utils.parseEther(totalPrice.toString()),
+                });
+
+                console.log(result.hash);
+                //setHashAddress("https://etherscan.io/tx/" + result.hash.toString());
+                setHashAddress("https://rinkeby.etherscan.io/tx/" + result.hash.toString());
+                setMintedAmount(amount);
+                setShowSuccess(true);
+            } catch (error) {
+                console.log("error : " + error.code.toString());
+                var message = "";
+                switch (error.code.toString()) {
+                    case "4001":
+                        setErrorMessage("Transaction rejected");
+                        break;
+                    case "INSUFFICIENT_FUNDS":
+                        setErrorMessage("Insufficient fund on your wallet");
+                        break;
+                    default:
+                        setErrorMessage("Transaction Failed");
+                }
+                //setErrorMessage(error.message.toString());
+                //setErrorMessage("Transaction Failed, can be of insufficient fund");
+                setError(true);
+            }
         }
     };
     if (!showConnectWallet && !showSwitchToDefaultNetwork) {
         //if (true) {
         return (
             <div className="relative h-full w-full justify-center overflow-hidden lg:h-full">
+                {error ? (
+                    <div
+                        onClick={() => {
+                            closeError();
+                        }}
+                        className="absolute top-[80px] z-50 m-0 flex h-screen w-full flex-shrink-0 flex-col backdrop-blur "
+                        style={{ justifyContent: "top", alignItems: "center" }}
+                    >
+                        <div className="mt-[100px] h-[300px] w-[300px] rounded-lg bg-white p-6" style={{ justifyContent: "center", alignItems: "center" }}>
+                            <a href="#">Oops! {errorMessage.toString()}</a>
+                        </div>
+                    </div>
+                ) : (
+                    <></>
+                )}
+                {showSuccess ? (
+                    <div className="absolute top-[80px] z-50 m-0 h-full w-full p-6 backdrop-blur " style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="relative top-0 mt-[0px] h-[500px] w-[350px] rounded-3xl bg-white p-6" style={{ justifyContent: "center", alignItems: "center" }}>
+                            <div>
+                                <ReactRoundedImage image={chosenImage} roundedColor="#000000" imageWidth="300" imageHeight="300" roundedSize="13" borderRadius="1000" />
+                            </div>
+                            <div className="h-[100px] text-center" style={{ justifyContent: "center", alignItems: "center" }}>
+                                You minted {mintedAmount}x {speciesNames[species]} species!
+                                <br />
+                                Lets get Stonked!
+                                <br />
+                                <a href={hashAddress} rel="noreferrer" target="_blank">
+                                    <b>
+                                        <u>Click here to monitor the minting progress</u>
+                                    </b>
+                                </a>
+                            </div>
+                            <div className="h-full text-center">
+                                <a
+                                    onClick={() => {
+                                        closeSuccessNotification();
+                                    }}
+                                    href="#"
+                                >
+                                    <ButtonPositive>Close</ButtonPositive>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <></>
+                )}
                 <div className="relative z-10 m-auto flex max-w-screen-md flex-col items-center gap-8 py-[20px] px-4 text-center align-middle lg:py-10">
                     <h2 className="med-hero-text">
                         Mint <span className="gradient move-gradient bg-[length:250%_250%] bg-clip-text text-transparent transition-none sm:py-20">Stonker</span>
@@ -223,54 +308,62 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex w-full text-center align-middle" style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <div
-                            style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}
-                            className="h-[80px] w-[100px]"
-                            onClick={() => {
-                                var num = amount - 1;
-                                adjustAmount(num);
-                            }}
-                        >
-                            <button className="px-4">
-                                <img src="/minusIcon.svg" alt="-" width="30px" />
-                            </button>
-                        </div>
-                        <div className="mint_number h-[80px] w-[100px]" style={{ color: "#fff", fontSize: "46px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            {amount}
-                        </div>
-                        <div style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }} className="h-[80px] w-[100px]">
-                            <button
-                                className="px-4"
+                    {!fetching ? (
+                        <div className="flex w-full text-center align-middle" style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <div
+                                style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}
+                                className="h-[80px] w-[100px]"
                                 onClick={() => {
-                                    var num = amount + 1;
+                                    var num = amount - 1;
                                     adjustAmount(num);
                                 }}
                             >
-                                <img src="/plusIcon.svg" alt="+" width="30px" />
-                            </button>
+                                <button className="px-4">
+                                    <img src="/minusIcon.svg" alt="-" width="30px" />
+                                </button>
+                            </div>
+                            <div className="mint_number h-[80px] w-[100px]" style={{ color: "#fff", fontSize: "46px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                {amount}
+                            </div>
+                            <div style={{ cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }} className="h-[80px] w-[100px]">
+                                <button
+                                    className="px-4"
+                                    onClick={() => {
+                                        var num = amount + 1;
+                                        adjustAmount(num);
+                                    }}
+                                >
+                                    <img src="/plusIcon.svg" alt="+" width="30px" />
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <></>
+                    )}
                 </div>
-                <p
-                    onClick={() => {
-                        mintToken();
-                    }}
-                >
-                    <div className="flex w-full cursor-pointer items-center justify-center">
-                        <div className="z-10 flex w-full flex-col items-center gap-8 px-4 text-center ">
-                            <div className="mb-[20px] h-[70px] w-full items-center justify-center px-4  text-center  lg:flex lg:h-[70px] lg:max-w-2xl lg:px-0">
-                                <div className="flex h-[70px] flex-row items-center justify-center rounded-lg p-4  lg:h-[70px] lg:w-[300px] " style={{ background: "linear-gradient(77.68deg, #3BCAB0 -20.56%, #DA69EC 21.53%, #C0FFF4 83.03%)", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                    <a className="align-middle" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                        <span className="leading-0 align-middle text-base font-bold  leading-none " style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "#0A2F0C" }}>
-                                            MINT FOR {totalPrice} ETH{" "}
-                                        </span>
-                                    </a>
+                {!fetching ? (
+                    <div
+                        onClick={() => {
+                            mintToken();
+                        }}
+                    >
+                        <div className="flex w-full cursor-pointer items-center justify-center">
+                            <div className="z-10 flex w-full flex-col items-center gap-8 px-4 text-center ">
+                                <div className="mb-[20px] h-[70px] w-full items-center justify-center px-4  text-center  lg:flex lg:h-[70px] lg:max-w-2xl lg:px-0">
+                                    <div className="flex h-[70px] flex-row items-center justify-center rounded-lg p-4  lg:h-[70px] lg:w-[300px] " style={{ background: "linear-gradient(77.68deg, #3BCAB0 -20.56%, #DA69EC 21.53%, #C0FFF4 83.03%)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                        <a className="align-middle" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                            <span className="leading-0 align-middle text-base font-bold  leading-none " style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "#0A2F0C" }}>
+                                                MINT FOR {totalPrice} ETH{" "}
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </p>
+                ) : (
+                    <></>
+                )}
             </div>
         );
     } else if (showSwitchToDefaultNetwork) {

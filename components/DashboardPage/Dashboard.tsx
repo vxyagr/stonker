@@ -43,7 +43,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //setIsConnected(props.accountConnected);
 
     // Read data from Snapshot API
-    const marketsResponse = useMarkets(chain.unsupported ? DEFAULT_CHAIN.id : chain.chain.id);
+    //const marketsResponse = useMarkets(chain.unsupported ? DEFAULT_CHAIN.id : chain.chain.id);
     const items: ICard[] = [];
     const [allCards, setAllCards] = useState();
     // UI states
@@ -52,7 +52,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //if (window.web3) {
 
     var contractAbi = require("../../abis/StonkerNFTABI.json");
-    const contractAddres = "0xaa015398ebD1f97cB7D887c5aC6dFaaD198E68Bf";
+    const contractAddres = "0xf31ccb4A5A41b1c502bB82584d39B981Df50Da74";
 
     // console.log(accountsList[0])
 
@@ -67,30 +67,54 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
 
     const axios = require("axios");
     // const request = require("request");
-    const [miningBalance, setMiningBalance] = useState(0);
-    const [monthlyMiningBalance, setMonthlyMiningBalance] = useState(0);
-    const [averageHashrate, setAverageHashrate] = useState(0);
-    const [workers, setWorkers] = useState(0);
-    const [ownerProfit, setOwnerProfit] = useState(0);
-    const showYield = async () => {
-        const account_address = "0xc72483d6aa551f9ab22b04ce2194e35f4e286c6c";
-        const request_url = `https://eth.2miners.com/api/accounts/${account_address}`;
-        const result = await axios.get(request_url);
-        const daily = result.data["24hreward"] / 1000000000;
+    const [human, setHuman] = useState(0);
+    const [elf, setElf] = useState(0);
+    const [vampire, setVampire] = useState(0);
+    const [android, setAndroid] = useState(0);
+    const [ownerPercent, setOwnerPercent] = useState(0);
+    const [zeroStonker, setZeroStonker] = useState(true);
+    const totalStonkerYield = 9822;
 
-        const hashrate = result.data["hashrate"] / 1000000000;
-        const workersOnline = result.data["workersOnline"];
-        //setOwnerProfit(daily * (ownedToken / allToken));
-        setOwnerProfit(daily);
-        const monthly = 30 * ownerProfit;
-        setMiningBalance(daily);
-        setMonthlyMiningBalance(monthly);
-        setAverageHashrate(hashrate);
-        setWorkers(workersOnline);
-        console.log();
-    };
-    showYield();
     const [cardData, setCardData] = useState([]);
+
+    const getOwned = async () => {
+        var owned = await contract.stonkersOfOwner(account);
+        //console.log(owned);
+        for (const [index, value] of owned.entries()) {
+            var card_: ICard = { tokenId: 0, yield: 0 };
+            card_.tokenId = value[0];
+            var yieldEffectivity = value[1].toString();
+            card_.yield = value[1];
+            items.push(card_);
+            switch (yieldEffectivity) {
+                case "20":
+                    availableSpecies[0]++;
+                    break;
+                case "16":
+                    availableSpecies[1]++;
+                    break;
+                case "13":
+                    availableSpecies[2]++;
+                    break;
+                case "10":
+                    availableSpecies[3]++;
+                    break;
+            }
+        }
+        setHuman(availableSpecies[3]);
+        setElf(availableSpecies[2]);
+        setVampire(availableSpecies[1]);
+        setAndroid(availableSpecies[0]);
+        var ownedPercent = ((1 * human + 1.3 * elf + 1.6 * vampire + 2 * android) / totalStonkerYield) * 100;
+        setOwnerPercent(ownedPercent);
+        if (ownedPercent > 0) setZeroStonker(false);
+        /*availableSpecies[0] = await contract.getAvailableSpecies(0);
+        availableSpecies[1] = await contract.getAvailableSpecies(1);
+        availableSpecies[2] = await contract.getAvailableSpecies(2);
+        availableSpecies[3] = await contract.getAvailableSpecies(3); */
+    };
+
+    getOwned();
     /*
     const getLokas = async () => {
         console.log("geting items " + items.length);
@@ -175,7 +199,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                     <div>
                         <div className="px-4 py-6 text-center sm:basis-1/4 sm:pl-8">
                             <p className="mb-6 text-sm leading-6 text-gray-light-10 dark:text-gray-dark-10">
-                                <div>You have</div> <span className="items-center justify-center text-4xl text-gray-light-12 dark:text-gray-dark-12">241 USDC</span> <div>of dividend</div>
+                                <div>You have</div> <span className="items-center justify-center text-4xl text-gray-light-12 dark:text-gray-dark-12">0 USDC</span> <div>of dividend</div>
                                 <Link href="#">
                                     <a className="button gradient inline-block rounded-full bg-[length:300%_300%] bg-center py-3 px-8 font-inter text-sm font-bold leading-none tracking-tight text-gray-50 hover:bg-left  hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 dark:text-gray-900 sm:text-base md:text-base">Claim</a>
                                 </Link>
@@ -183,30 +207,60 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                             <p className="text-sm font-bold leading-6 text-gray-light-12 dark:text-gray-dark-12"></p>
                         </div>
                         <div className="mt-6 h-full grid-cols-2 gap-x-4 gap-y-1 px-4 text-center sm:basis-2/4 sm:pl-8 md:flex lg:flex" style={{ justifyContent: "center", alignItems: "center" }}>
-                            <div className="relative z-10 my-2  h-[100px] overflow-hidden rounded-2xl px-20 ">
+                            <div className="relative z-10 my-2  h-[160px] w-[350px] overflow-hidden rounded-2xl px-20 ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
-                                    <div className="flex items-center justify-center text-3xl text-slate-50">
-                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">USDC 420</span>
-                                    </div>
                                     <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Total Claimed</div>
+                                    <div className="flex items-center justify-center text-3xl text-slate-50">
+                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">USDC 0</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="relative z-10 my-2  h-[100px] overflow-hidden rounded-2xl px-20  ">
+                            <div className="relative z-10 my-2  h-[160px] w-[350px] overflow-hidden rounded-2xl px-20  ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
-                                    <div className="flex items-center justify-center text-3xl text-slate-50">
-                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">1.45%</span>
-                                    </div>
                                     <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Your Farming Profit Ownership</div>
+                                    <div className="flex items-center justify-center text-3xl text-slate-50">
+                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">{ownerPercent.toFixed(2).toString()} %</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="relative z-10 my-2 h-[100px] overflow-hidden rounded-2xl px-20  ">
+                            <div className="relative z-10 my-2 h-[160px] w-[350px] overflow-hidden rounded-2xl px-20  ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
-                                    <div className="flex items-center justify-center text-3xl text-slate-50">
-                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">USDC 108</span>
+                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Your Stonker NFT Species</div>
+                                    <div className="flex items-center justify-center text-2xl text-slate-50">
+                                        <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">
+                                            {human > 0 ? (
+                                                <div>
+                                                    <span>Human x {human.toString()}</span>
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            {elf > 0 ? (
+                                                <div>
+                                                    <span>Elf x {elf.toString()}</span>
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            {vampire > 0 ? (
+                                                <div>
+                                                    <span>Vampire x {vampire.toString()}</span>
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            {android > 0 ? (
+                                                <div>
+                                                    <span>Android x {android.toString()}</span>
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            {zeroStonker ? <div>0 NFTs</div> : <></>}
+                                        </span>
                                     </div>
-                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">14 days yield</div>
                                 </div>
                             </div>
                         </div>
@@ -216,8 +270,9 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                         <hr />
                     </div>
                     <h2 className="med-hero-text">
-                        Stonker <span className="gradient move-gradient bg-[length:250%_250%] bg-clip-text text-transparent transition-none sm:py-20">Treasury</span>
+                        Stonker <span className="gradient move-gradient bg-[length:250%_250%] bg-clip-text text-transparent transition-none sm:py-20">Treasury Farming</span>
                     </h2>
+                    <h2 className="small-hero-text">(coming soon)</h2>
                     <div className="md:flex lg:flex ">
                         {/*<NFTCard tokenId={0} yield={20} />
                         <NFTCard tokenId={0} yield={20} />

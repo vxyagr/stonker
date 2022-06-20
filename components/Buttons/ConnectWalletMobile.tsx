@@ -137,7 +137,7 @@ const ButtonConnectWalletMobile: FunctionComponent<ButtonConnectWalletMobileProp
 
     return (
         <>
-            <div className="fixed bottom-0 flex h-[64px] w-full flex-row space-x-2 p-4">
+            <div className="relative flex h-[64px] w-full flex-row space-x-2 p-4">
                 {/* Network switcher popover */}
                 <Popover id="popover-1">
                     {({ open }) => {
@@ -159,7 +159,7 @@ const ButtonConnectWalletMobile: FunctionComponent<ButtonConnectWalletMobileProp
                                     </p>
                                     {/**{getChainIconPath(chain.chain)}   <Popover.Button ref={setReferenceElement1} className="button basic w-[40px] p-2 outline-0">*/}
                                 </Link>
-                                <Popover.Panel ref={setPopperElement1} style={popper1.styles.popper} {...popper1.attributes.popper} className="flex min-w-[241px] flex-col rounded-[16px] border border-gray-light-4 bg-gray-light-2 p-4 dark:border-gray-dark-4 dark:bg-gray-dark-2">
+                                <Popover.Panel ref={setPopperElement1} style={popper1.styles.popper} {...popper1.attributes.popper} className="flex min-w-[100px] flex-col rounded-[16px] border border-gray-light-4 bg-gray-light-2 p-4 dark:border-gray-dark-4 dark:bg-gray-dark-2">
                                     {({ close }) => {
                                         return (
                                             <>
@@ -425,24 +425,7 @@ const ButtonConnectWalletMobile: FunctionComponent<ButtonConnectWalletMobileProp
                 </Popover>
 
                 {/* Hamburger menu popover */}
-                <div className=" z-50 lg:hidden">
-                    <button>
-                        <Hamburger
-                            direction="right"
-                            color="#FFFFFF"
-                            onToggle={(toggled) => {
-                                if (toggled) {
-                                    // open a menu
-                                    setOpenMenu(true);
-                                } else {
-                                    setOpenMenu(false);
-                                }
-                            }}
-                        />
-                    </button>
-                </div>
             </div>
-            {openMenu ? <BurgerMenu open={openMenu} /> : <></>}
         </>
     );
 };

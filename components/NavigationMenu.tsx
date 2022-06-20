@@ -67,8 +67,8 @@ const Navigation: FunctionComponent<NavigationProps> = (props) => {
     return (
         //<div className='{"background":"linear-gradient(89.93deg, #0A2F0C 27.17%, #295771 76.4%, #0A2F0C 99.83%)"} sticky  top-0 z-40 flex flex-row items-center justify-between bg-green-300 p-4 backdrop-blur-lg dark:bg-green-700 '>
         <>
-            <div className="items-right  hidden p-4 lg:flex">
-                <ul className="flex space-x-2">
+            <div className="items-right hidden h-[60px] items-center  justify-center p-4 lg:flex">
+                <ul className="flex h-[50px] items-center justify-center space-x-2">
                     <li className="cursor-pointer">
                         <Link href="/mint">
                             <p className="first::pt-0 text-2xs font-500 padding-huge relative flex h-7 flex-row items-center items-center items-center justify-center rounded bg-white bg-opacity-20 px-4 pt-0.5 font-mono uppercase tracking-wider text-white  duration-1000 duration-200 hover:bg-opacity-70">Buy</p>
@@ -154,7 +154,7 @@ const Navigation: FunctionComponent<NavigationProps> = (props) => {
                     {props.showWallet && (
                         <>
                             <li className="cursor-pointer">
-                                <div className="hidden p-0 lg:flex">
+                                <div className="hidden p-0 lg:flex" style={{ justifyContent: "center", alignItems: "center" }}>
                                     <ButtonConnectWalletDesktop />
                                 </div>
                             </li>

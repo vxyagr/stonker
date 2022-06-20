@@ -68,16 +68,16 @@ const Navigation: FunctionComponent<NavigationProps> = ({}) => {
         //<div className='{"background":"linear-gradient(89.93deg, #0A2F0C 27.17%, #295771 76.4%, #0A2F0C 99.83%)"} sticky  top-0 z-40 flex flex-row items-center justify-between bg-green-300 p-4 backdrop-blur-lg dark:bg-green-700 '>
         <>
             <div className={` lg sticky top-0 z-40 flex h-[80px] flex-row items-center justify-between py-1 backdrop-blur-lg `}>
-                <div className="h-16 w-[162.8px] flex-none cursor-pointer p-4">
+                <div className="h-[60px] w-[162.8px] flex-none cursor-pointer p-4">
                     <Link href="/">
                         <p className="flex items-center">
                             <Logo />
                         </p>
                     </Link>
                 </div>
-
-                <NavigationMenu showWallet={false} />
-
+                <div>
+                    <NavigationMenu showWallet={false} />
+                </div>
                 <div className="z-50 lg:hidden">
                     <button>
                         <Hamburger

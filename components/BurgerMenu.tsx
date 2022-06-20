@@ -36,34 +36,47 @@ const BurgerMenu = ({ open }: { open: any }) => {
     return (
         //<div className='{"background":"linear-gradient(89.93deg, #0A2F0C 27.17%, #295771 76.4%, #0A2F0C 99.83%)"} sticky  top-0 z-40 flex flex-row items-center justify-between bg-green-300 p-4 backdrop-blur-lg dark:bg-green-700 '>
         <>
-            <div className="lg pointer pt-15 fixed  absolute sticky top-[80px] left-0 z-40 ml-0 flex h-screen w-screen flex-col items-start overflow-scroll bg-white bg-opacity-90 px-6 backdrop-blur" data-projection-id={12} style={{ opacity: 1, cursor: "pointer" }}>
+            <div className="lg  pt-15  sticky top-[80px] left-0 z-40 ml-0 flex h-screen w-screen flex-col items-start overflow-scroll bg-white bg-opacity-90 px-6 backdrop-blur" data-projection-id={12} style={{ opacity: 1 }}>
                 <ul className="font-900 w-full text-xl uppercase">
-                    <li className=" border-b border-black border-opacity-10">
+                    <li className="h-[60px] border-b border-black border-opacity-10">
+                        <Link href="#">
+                            <p className="relative block flex w-full items-center py-3 text-black"> </p>
+                        </Link>
+                    </li>
+                    <li className="pointer border-b border-black border-opacity-10">
                         <Link href="/mint">
-                            <p className="relative block flex w-full items-center py-3 text-black">BUY </p>
+                            <p className="relative block flex w-full items-center py-3 text-black" style={{ opacity: 1, cursor: "pointer" }}>
+                                BUY{" "}
+                            </p>
                         </Link>
                     </li>
-                    <li className=" border-b border-black border-opacity-10">
+                    <li className="pointer border-b border-black border-opacity-10">
                         <Link href="/dashboard">
-                            <p className="relative block flex w-full items-center py-3 text-black">DASHBOARD </p>
+                            <p className="relative block flex w-full items-center py-3 text-black" style={{ opacity: 1, cursor: "pointer" }}>
+                                DASHBOARD{" "}
+                            </p>
                         </Link>
                     </li>
 
-                    <li className=" border-b border-black border-opacity-10">
+                    <li className="pointer border-b border-black border-opacity-10">
                         <Link href="/about">
-                            <p className="relative block flex w-full items-center py-3 text-black">ABOUT </p>
+                            <p className="relative block flex w-full items-center py-3 text-black" style={{ opacity: 1, cursor: "pointer" }}>
+                                ABOUT{" "}
+                            </p>
                         </Link>
                     </li>
 
-                    <li className=" border-b border-black border-opacity-10">
+                    <li className="pointer border-b border-black border-opacity-10">
                         <Link href="https://vxyagr.gitbook.io/stonker">
-                            <p className="relative block flex w-full items-center py-3 text-black">DOCS </p>
+                            <p className="relative block flex w-full items-center py-3 text-black" style={{ opacity: 1, cursor: "pointer" }}>
+                                DOCS{" "}
+                            </p>
                         </Link>
                     </li>
 
-                    <li className=" border-b border-black border-opacity-10">
+                    <li className="pointer border-b border-black border-opacity-10">
                         <Link href="https://twitter.com/stonkerclub">
-                            <p className="relative block flex w-full items-center py-3 text-black">
+                            <p className="relative block flex w-full items-center py-3 text-black" style={{ opacity: 1, cursor: "pointer" }}>
                                 twitter{" "}
                                 <svg xmlns="http://www.w3.org/2000/svg" className="ml-auto h-4 w-4 fill-current stroke-current" viewBox="0 0 40 40">
                                     <path d="M38.526 8.625a15.199 15.199 0 01-4.373 1.198 7.625 7.625 0 003.348-4.211 15.25 15.25 0 01-4.835 1.847 7.6 7.6 0 00-5.557-2.404c-4.915 0-8.526 4.586-7.416 9.346-6.325-.317-11.934-3.347-15.69-7.953C2.01 9.869 2.97 14.345 6.358 16.612a7.58 7.58 0 01-3.446-.953c-.084 3.527 2.444 6.826 6.105 7.56a7.63 7.63 0 01-3.438.13 7.618 7.618 0 007.112 5.286A15.306 15.306 0 011.42 31.79a21.55 21.55 0 0011.67 3.42c14.134 0 22.12-11.937 21.637-22.643a15.499 15.499 0 003.799-3.941z" />
@@ -71,7 +84,7 @@ const BurgerMenu = ({ open }: { open: any }) => {
                             </p>
                         </Link>
                     </li>
-                    <li className=" border-b border-black border-opacity-10">
+                    {/*<li className="pointer border-b border-black border-opacity-10">
                         <Link href="https://www.instagram.com/stonkerclub/">
                             <p className="relative block flex w-full items-center py-3 text-black">
                                 instagram{" "}
@@ -80,8 +93,8 @@ const BurgerMenu = ({ open }: { open: any }) => {
                                 </svg>
                             </p>
                         </Link>
-                    </li>
-                    <li className=" border-b border-black border-opacity-10">
+                    </li> 
+                    <li className="pointer border-b border-black border-opacity-10">
                         <Link href="http://discord.gg/">
                             <p className="relative block flex w-full items-center py-3 text-black">
                                 discord{" "}
@@ -90,7 +103,7 @@ const BurgerMenu = ({ open }: { open: any }) => {
                                 </svg>
                             </p>
                         </Link>
-                    </li>
+                    </li>*/}
                 </ul>
                 <p className="text-2xs mt-6 pb-4 text-left font-mono uppercase opacity-80">Vøyagr © 2022</p>
             </div>

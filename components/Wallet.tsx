@@ -11,6 +11,9 @@ export const connectorStorageKey = "lokaConnectors.wallet";
 //export const supportedChains = [Chains.rinkeby, Chains.mainnet, Chains.kovan];
 export const supportedChains = [Chains.rinkeby];
 export const DEFAULT_CHAIN = Chains.rinkeby;
+//export const supportedChains = [Chains.mainnet];
+//export const DEFAULT_CHAIN = Chains.mainnet;
+//
 
 // Wallet connectors
 export const MetaMaskConnector = new InjectedConnector({
@@ -22,16 +25,17 @@ export const WCConnector = new WalletConnectConnector({
     options: {
         qrcode: true,
         rpc: {
-            [Chains.kovan.id]: "https://eth-kovan.alchemyapi.io/v2/qLbNN95iUDTpQqbm5FzgaSPrPJ908VD-",
-            [Chains.rinkeby.id]: "https://rinkeby.infura.io/v3/8051d992532d4f65b1cea01cb751d577",
-            [Chains.arbitrumOne.id]: "https://arb-mainnet.g.alchemy.com/v2/qu4tZ0JUekqqwtcDowbfel-s4S8Z60Oj",
+            //[Chains.mainnet.id]: "https://eth-kovan.alchemyapi.io/v2/qLbNN95iUDTpQqbm5FzgaSPrPJ908VD-",
+            [Chains.rinkeby.id]: "https://rinkeby.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a",
+            //[Chains.arbitrumOne.id]: "https://arb-mainnet.g.alchemy.com/v2/qu4tZ0JUekqqwtcDowbfel-s4S8Z60Oj",
         },
     },
 });
 
 export const ArbitrumOneProvider = new providers.JsonRpcProvider("https://arb-mainnet.g.alchemy.com/v2/qu4tZ0JUekqqwtcDowbfel-s4S8Z60Oj", Chains.arbitrumOne.id);
 export const KovanProvider = new providers.JsonRpcProvider("https://eth-kovan.alchemyapi.io/v2/qLbNN95iUDTpQqbm5FzgaSPrPJ908VD-", Chains.kovan.id);
-export const RinkebyProvider = new providers.JsonRpcBatchProvider("https://rinkeby.infura.io/v3/8051d992532d4f65b1cea01cb751d577");
+export const RinkebyProvider = new providers.JsonRpcBatchProvider("https://rinkeby.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a", Chains.rinkeby.id);
+export const MainnetProvider = new providers.JsonRpcBatchProvider("https://mainnet.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a", Chains.mainnet.id);
 export type WalletStates = {
     account: string | undefined;
     chain: { unsupported: Boolean; chain: Chain };
@@ -67,7 +71,7 @@ type WalletGlobalStateProps = {
 const getProvider = (config: { chainId?: number }) => {
     switch (config.chainId) {
         case Chains.mainnet.id:
-            return KovanProvider;
+            return MainnetProvider;
         case Chains.kovan.id:
             return KovanProvider;
         case Chains.arbitrumOne.id:
