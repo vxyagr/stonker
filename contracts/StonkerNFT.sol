@@ -1453,7 +1453,7 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
   constructor() ERC721A("Stonker", "STONKER", 8787, 8787)  {
      
       //timeTool = TimeTool(0x92482Ba45A4D2186DafB486b322C6d0B88410FE7); //Rinkeby
-      timeTool = TimeTool(0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce); //Mainnet
+      timeTool = TimeTool(0x20e05d289AC6e5130B57d26085141eF2a61EDc48); //Mainnet
       _tokenCounter=0;
       //stonkerMaxSupply = 8787;
       mintingEnabled = false;
@@ -1496,7 +1496,7 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
   }
 
    function getPrice(uint8 species_)public view returns(uint256){
-     require(species_<4&&species_>=0,"no such species");
+     //require(species_<4&&species_>=0,"no such species");
     return mintPrices[species_];
   }
 	
@@ -1601,16 +1601,20 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
     return species_;
   }
 
+  function getCurrentHour() public view returns (uint256){
+    return timeTool.getHour(block.timestamp);
+  }
+
   function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
     require(
       _exists(tokenId),
       "ERC721Metadata: URI query for nonexistent token"
     );
-    uint256 hour_ = timeTool.getHour(block.timestamp);
+    uint256 hour_ = getCurrentHour();
 
-    if(hour_==6&&hour_<12)hour_=0;
-    else if(hour_==12&&hour_<17)hour_=1;
-    else if(hour_==17&&hour_<20)hour_=2;
+    if(hour_>=6&&hour_<12)hour_=0;
+    else if(hour_>=12&&hour_<17)hour_=1;
+    else if(hour_>=17&&hour_<20)hour_=2;
     else{hour_=3;}
    // string memory baseURI = baseURIs[stonkers[tokenId].mintBatch][hour_];
     if(!isRevealed[stonkers[tokenId].mintBatch]){
@@ -1628,7 +1632,6 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
     (bool success, ) = msg.sender.call{value: address(this).balance}("");
     require(success, "Transfer failed.");
   }
-
  
   
 	function stonkersOfOwner(address _owner) external view returns(stonkerNFTDetail[] memory ) {
@@ -1651,4 +1654,6 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
 			return _stonkers;
 		
 	} 
+
+ 
 }
