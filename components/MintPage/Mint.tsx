@@ -49,7 +49,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     var contractAbi = require("../../abis/StonkerNFTABI.json");
     //const contractAddres = "0x21Bf9D1BBc6FA5C39378fe3091B05EF51d24BcFF"; //rinkeby
 
-    const contractAddres = "0x01c759b0cC11d2c4c82613A77cEDc9d4552706E7"; //mainnet
+    const contractAddres = "0x6BdD2353D12a78FEa7487829adaB30bf391ae336"; //mainnet
 
     // console.log(accountsList[0])
 
