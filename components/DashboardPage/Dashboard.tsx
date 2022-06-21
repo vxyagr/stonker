@@ -52,8 +52,9 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //if (window.web3) {
 
     var contractAbi = require("../../abis/StonkerNFTABI.json");
-    const contractAddres = "0x21Bf9D1BBc6FA5C39378fe3091B05EF51d24BcFF";
+    //const contractAddres = "0x21Bf9D1BBc6FA5C39378fe3091B05EF51d24BcFF"; //rinkeby
 
+    const contractAddres = "0x01c759b0cC11d2c4c82613A77cEDc9d4552706E7"; //mainnet
     // console.log(accountsList[0])
 
     // const provider = new providers.JsonRpcBatchProvider("https://rinkeby.infura.io/v3/8051d992532d4f65b1cea01cb751d577");
@@ -211,7 +212,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                         <div className="mt-6 h-full grid-cols-2 gap-x-4 gap-y-1 px-4 text-center sm:basis-2/4 sm:pl-8 md:flex lg:flex" style={{ justifyContent: "center", alignItems: "center" }}>
                             <div className="relative z-10 my-2  h-[160px] w-[350px] overflow-hidden rounded-2xl px-20 ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
-                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Total Claimed</div>
+                                    <div className="h-[60px] p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Total Claimed</div>
                                     <div className="flex items-center justify-center text-3xl text-slate-50">
                                         <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">USDC 0</span>
                                     </div>
@@ -220,7 +221,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
 
                             <div className="relative z-10 my-2  h-[160px] w-[350px] overflow-hidden rounded-2xl px-20  ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
-                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Your Farming Profit Ownership</div>
+                                    <div className="h-[60px] p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Your Farming Profit Ownership</div>
                                     <div className="flex items-center justify-center text-3xl text-slate-50">
                                         <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">{ownerPercent.toFixed(2).toString()} %</span>
                                     </div>
@@ -229,7 +230,7 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
 
                             <div className="relative z-10 my-2 h-[160px] w-[350px] overflow-hidden rounded-2xl px-20  ">
                                 <div className="relative aspect-square w-full " style={{ justifyContent: "center", alignItems: "center" }}>
-                                    <div className="p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Your Stonker NFT Species</div>
+                                    <div className=" p-2 text-sm text-gray-light-12 dark:text-gray-dark-12">Your Stonker NFT Species</div>
                                     <div className="flex items-center justify-center text-2xl text-slate-50">
                                         <span className="items-center justify-center text-gray-light-12 dark:text-gray-dark-12">
                                             {human > 0 ? (

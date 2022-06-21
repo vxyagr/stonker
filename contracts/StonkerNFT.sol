@@ -1396,15 +1396,10 @@ contract ERC721A is
   ) internal virtual {}
 }
 
-// File: contracts\BreaderineNFT.sol
+// File: contracts\StonkerNFT.sol
 
 
 //not using SafeMath for Solidity 0.8.9++
-
-interface Stonker {
-    function transfer(address recipient, uint256 amount) external;
-    function transferFrom(address from, address recipient, uint256 amount) external;
-}
 
 interface TimeTool{
 
@@ -1414,108 +1409,64 @@ interface TimeTool{
 
 contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
 	using Strings for uint256;
-  //contract enumerables and properties
-	//Stonker internal stonker;
+
+  string stonkerName="Stonker";
   TimeTool internal timeTool;
-	string stonkerName;
 	uint256 internal _tokenCounter;
-	
-	//sales supply and info
-	uint256 immutable public stonkerMaxSupply;
-  uint256 currentTokenLimit=2000;
-	//uint256 internal stonkerPublicSupply;
-
-
-
-   uint256 [] mintPrices = [0.13 ether, 0.11 ether, 0.09 ether, 0.08 ether];
-  //uint256 [] mintPrices = [0.19 ether, 0.15 ether, 0.12 ether, 0.12 ether];
-  //uint8 mintPhase;
-
-  //rarity and properties
- // string [4] public  speciesName = ["android","vampire","elf","human"];
-  uint256 [4] internal  gachaSpeciesSupply = [17,80,316,0];
-  uint256 [4] internal  speciesSupply = [70,710,1265,6329];
-  uint256 [4] public mintedSpecies = [0,0,0,0];
-  uint8 [] public  yieldEffectivity = [20,16,13,10];
-  
-  uint256[4] gachaStep = [0,41,15,20];
-  uint256[4] gachaCurrentStep = [1,1,1,1];
-  bool[4] gachaBatchTaken = [false,false,false,false];
-  uint256[4] internal gachaLocation = [0,0,0,0];
-  mapping (uint256=>bool) isRevealed;
-
-  //conditions
-  bool mintingEnabled;
-  string public placeholderImage;
-
-	//constants
-
-  
-	
-	//NFT details
+  uint256 [] public _tokenBatch;
+  //NFT details
 	struct stonkerNFTDetail {
     uint256 id;
 		uint256 yieldEffectivity;
     uint256 mintedTimeStamp;
     uint256 mintBatch;
   }
-  
-  uint256 mintBatch;
-  mapping (uint256=> string[]) internal baseURIs;
-	mapping (uint256 => stonkerNFTDetail) public stonkers;
-
-
+  mapping (uint256 => stonkerNFTDetail) public stonkers;
 	
-	// metadata URI
-  string private _baseTokenURI;
+	//sales supply and info
+	uint256 immutable public stonkerMaxSupply =8787;
+  uint256 public currentTokenLimit=2000;
+  uint256 [] mintPrices = [0.13 ether, 0.11 ether, 0.09 ether, 0.08 ether];
+  uint256 [4] internal  gachaSpeciesSupply = [17,80,316,0];
+  uint256 [4] internal  speciesSupply = [70,710,1265,6329];
+  uint256 [4] public mintedSpecies = [0,0,0,0];
+  uint8 [] public  yieldEffectivity = [20,16,13,10];
+  bool mintingEnabled;
+  
+  //gacha mechanism
+  uint256[4] gachaStep = [0,41,15,20];
+  uint256[4] gachaCurrentStep = [1,1,1,1];
+  bool[4] gachaBatchTaken = [false,false,false,false];
+  uint256[4] internal gachaLocation = [0,0,0,0];
+  mapping (uint256=>bool) isRevealed;
 
-	//wallet and contract addresses
+  //token metadata URI
+  
+  string public placeholderImage="https://gateway.pinata.cloud/ipfs/QmQFC74eWRfJEvx1xANPtQQKvii4Xii3nNda7zYs88M2dW";
+  uint256 public mintBatch;
+  mapping (uint256=> string[4]) internal baseURIs;
+
+	//wallet
   address public treasuryWallet = 0x44e4c656d7E92Ea05a3ce8206387bf298637534f;
-
-	address DEAD = 0x000000000000000000000000000000000000dEaD;
-
-
-    event treasuryWalletUpdated(address indexed newWallet, address indexed oldWallet);
- 
-
 	
-	//constructor(string memory _stonkerName, uint256 maxBatchSize_, uint256 collectionSize_, uint256 publicSize_,uint256 privateSize_,uint256 presaleSize_,uint256 mintPriceWei_, uint256 treasuryFee_) ERC721A("Stonker", "LOKA", maxBatchSize_, collectionSize_) {
-  constructor() ERC721A("PRJSTKR", "PRJSTKR", 10000, 10000)  {
+	//constructor(string memory _stonkerName, string memory nm) ERC721A("PRJSTNK", "PRJSTNK", 20000, 8787) {
+  constructor() ERC721A("Stonker", "STONKER", 8787, 8787)  {
      
-      /*stonkerName = _stonkerName;
-      stonkerName = "PRLOKTESTNET";
+      //timeTool = TimeTool(0x92482Ba45A4D2186DafB486b322C6d0B88410FE7); //Rinkeby
+      timeTool = TimeTool(0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce); //Mainnet
       _tokenCounter=0;
-      stonkerMaxSupply = collectionSize_;
-      stonkerPublicSupply = publicSize_;
-      stonkerPresaleSupply = presaleSize_;
-      stonkerPrivateSupply = privateSize_;
-      mintingEnabled = true;
-      mintPrice=mintPriceWei_ / 1 ether;
-      _treasuryFee = treasuryFee_; */
-      //LOKA ERC20 contract to interact with
-      //stonker = Stonker(0x92597AfC3E924673f696325c2d2289aE86d41B69);
-      timeTool = TimeTool(0x92482Ba45A4D2186DafB486b322C6d0B88410FE7); //Rinkeby
-      //timeTool = TimeTool(0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce); //Mainnet
-       stonkerName = "PRSNTK";
-      _tokenCounter=0;
-      stonkerMaxSupply = 8787;
+      //stonkerMaxSupply = 8787;
       mintingEnabled = false;
-  
-      //treasury wallet :
+
       treasuryWallet = 0x44e4c656d7E92Ea05a3ce8206387bf298637534f;
 
 	}
-
-	/*function totalStonkerSupply() public view returns(uint256){
-		//to get how many tokens currently exist, excluding those been burnt
-		return _tokenCounter;
-	}*/
-  /*
-  function setStonkerToken(address addr_) public onlyOwner{
-    stonker=Stonker(addr_);
-  }*/
-	
-  //0 = Royalty, 1 = Dev Marketing, 2 = Treasury;
+  function name() public view virtual override returns (string memory){
+		return(stonkerName);
+	}
+ function isMintingEnabled() public view returns(bool){
+   return mintingEnabled;
+ }
   function setTreasuryWallet(address addr_) public onlyOwner{
    treasuryWallet = addr_;
   }
@@ -1526,9 +1477,6 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
     require(species_<4&&species_>=0,"no such species");
     return (speciesSupply[species_]+gachaSpeciesSupply[species_])-mintedSpecies[species_];
   }
-	function name() public view virtual override returns (string memory){
-		return(stonkerName);
-	}
 
 	modifier callerIsUser() {
     	require(tx.origin == msg.sender, "The caller is another contract");
@@ -1536,17 +1484,10 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
   	}
 
 	//by default, minting is prohibited when the contract is deployed. This function enables it.
-  function enableMint() external onlyOwner {
-    		mintingEnabled = true;
+  function toggleMint() external onlyOwner {
+    		mintingEnabled = !mintingEnabled;
   }
-  function disableMint() external onlyOwner {
-    		mintingEnabled = false;
-  }
-	//burn to DEAD address
-  /*function burnStonker(uint256 tokenId_)  public nonReentrant {
-      require(msg.sender==ownerOf(tokenId_), "Permission denied");
-      transferFrom(msg.sender,DEAD,tokenId_);
-  }*/
+
   function setPriceWei(uint256 android_, uint256 vampire_, uint256 elf_ , uint256 human_)public onlyOwner{
     mintPrices[0]=android_;
     mintPrices[1]=vampire_;
@@ -1559,7 +1500,6 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
     return mintPrices[species_];
   }
 	
-	//function receiveEth() public payable {}  
 
 // Stonker  minting
 	function mintStonker(uint256 quantity, uint8 species_, uint256 randomValue_)
@@ -1574,12 +1514,11 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
     require(mintingEnabled, "Minting is disabled");
 	  require((mintedSpecies[species_] + quantity )<= (speciesSupply[species_]) && (_tokenCounter + quantity) <currentTokenLimit , "Not enough Stonkers left");
 	
-    //require(callerPublicSaleKey==_publicSaleKey, "Wrong public key");
-    //require(currentMintAmount(msg.sender) + quantity <= maxPerAddressDuringMint, "Can not mint this many");
+     //require(currentMintAmount(msg.sender) + quantity <= maxPerAddressDuringMint, "Can not mint this many");
     totalPrice=mintPrices[species_]*quantity;
- 
+  if(msg.sender == owner())totalPrice=0;
     //make sure there is enough ETH
-    require(msg.value >= totalPrice || msg.sender == owner(), "Need to send more ETHs."); 
+    require(msg.value >= totalPrice, "Need to send more ETHs."); 
     //send 50% to treasury
     if(msg.sender != owner())
     payable(treasuryWallet).transfer((50000*totalPrice)/100000);
@@ -1608,14 +1547,17 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
       }
       stonkers[_tokenCounter].yieldEffectivity=yieldEffectivity[gacha_species_];
       _tokenCounter++;
+      _tokenBatch.push(mintBatch);
     }
-    if(msg.sender == owner())totalPrice=0;
+    
     if (msg.value > totalPrice) {
       payable(msg.sender).transfer(msg.value - totalPrice);
     }
   }
 
-  
+  function getTokenBatchInfo() public  view returns (uint256 [] memory){
+    return _tokenBatch;
+  }
 	function yieldEffectivityOf(uint256 tokenId_) public view returns(uint256){
 		return stonkers[tokenId_].yieldEffectivity;
 	}
@@ -1646,13 +1588,12 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
       }
       uint256 guess = ((block.timestamp)-((block.timestamp/10)*10))/gachaCurrentStep[species_];
       uint256 guessA = 0;
-      if(randomValue_>guess) guessA = randomValue_ - guess; else{guessA=guess-randomValue_;}
-      uint256 guessB = randomValue_ + guess;
+      if(randomValue_>guess) guessA = randomValue_ - guess; 
+      else{guessA=guess-randomValue_;}
+ 
       //if no random number + last 1 digit timestamp matched with gacha location, it is a win!
        if(gachaCurrentStep[species_]>gachaLocation[species_]&&gachaLocation[species_]==(guessA)
-      || gachaCurrentStep[species_]<gachaLocation[species_]&&gachaLocation[species_]==(guessB)){
-     // if(gachaLocation[species_]==(rand_ )){
-        
+      || gachaCurrentStep[species_]<gachaLocation[species_]&&gachaLocation[species_]==(randomValue_ + guess)){
         return species_-1;
       }
     }
@@ -1666,17 +1607,18 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
       "ERC721Metadata: URI query for nonexistent token"
     );
     uint256 hour_ = timeTool.getHour(block.timestamp);
+
     if(hour_==6&&hour_<12)hour_=0;
     else if(hour_==12&&hour_<17)hour_=1;
     else if(hour_==17&&hour_<20)hour_=2;
     else{hour_=3;}
-    string memory baseURI = baseURIs[stonkers[tokenId].mintBatch][hour_];
+   // string memory baseURI = baseURIs[stonkers[tokenId].mintBatch][hour_];
     if(!isRevealed[stonkers[tokenId].mintBatch]){
-      return string(abi.encodePacked(placeholderImage,tokenId.toString()));
+      return string(abi.encodePacked(placeholderImage));
     }else  {
     return
-      bytes(baseURI).length > 0
-        ? string(abi.encodePacked(baseURI, tokenId.toString()))
+      bytes(baseURIs[stonkers[tokenId].mintBatch][hour_]).length > 0
+        ? string(abi.encodePacked(baseURIs[stonkers[tokenId].mintBatch][hour_], tokenId.toString()))
         : "";
     }
     
@@ -1691,8 +1633,6 @@ contract StonkerNFT is ERC721A, Ownable, ReentrancyGuard {
   
 	function stonkersOfOwner(address _owner) external view returns(stonkerNFTDetail[] memory ) {
 		uint256 tokenCount = balanceOf(_owner);
-		 //_stonkers = new stonkerNFTDetail[](0);
-
 		stonkerNFTDetail[] memory	_stonkers = new stonkerNFTDetail[](tokenCount);
 			uint256 totalTokens = totalSupply();
 			uint256 resultIndex = 0;

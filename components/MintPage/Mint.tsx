@@ -47,7 +47,9 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
     //if (window.web3) {
 
     var contractAbi = require("../../abis/StonkerNFTABI.json");
-    const contractAddres = "0x21Bf9D1BBc6FA5C39378fe3091B05EF51d24BcFF";
+    //const contractAddres = "0x21Bf9D1BBc6FA5C39378fe3091B05EF51d24BcFF"; //rinkeby
+
+    const contractAddres = "0x01c759b0cC11d2c4c82613A77cEDc9d4552706E7"; //mainnet
 
     // console.log(accountsList[0])
 
@@ -166,8 +168,8 @@ const Hero: FunctionComponent<HeroProps> = (props) => {
                     });
 
                     console.log(result.hash);
-                    //setHashAddress("https://etherscan.io/tx/" + result.hash.toString());
-                    setHashAddress("https://rinkeby.etherscan.io/tx/" + result.hash.toString());
+                    setHashAddress("https://etherscan.io/tx/" + result.hash.toString());
+                    //setHashAddress("https://rinkeby.etherscan.io/tx/" + result.hash.toString());
                     setMintedAmount(amount);
                     setShowSuccess(true);
                 } catch (error) {

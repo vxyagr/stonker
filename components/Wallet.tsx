@@ -8,11 +8,11 @@ import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 export const connectorStorageKey = "stonkerConnectors.wallet";
 
-//export const supportedChains = [Chains.rinkeby, Chains.mainnet, Chains.kovan];
-export const supportedChains = [Chains.rinkeby];
-export const DEFAULT_CHAIN = Chains.rinkeby;
-//export const supportedChains = [Chains.mainnet];
-//export const DEFAULT_CHAIN = Chains.mainnet;
+export const supportedChains = [Chains.mainnet];
+//export const supportedChains = [Chains.rinkeby];
+
+export const DEFAULT_CHAIN = Chains.mainnet;
+//export const DEFAULT_CHAIN = Chains.rinkeby;
 //
 
 // Wallet connectors
@@ -25,8 +25,8 @@ export const WCConnector = new WalletConnectConnector({
     options: {
         qrcode: true,
         rpc: {
-            //[Chains.mainnet.id]: "https://eth-kovan.alchemyapi.io/v2/qLbNN95iUDTpQqbm5FzgaSPrPJ908VD-",
-            [Chains.rinkeby.id]: "https://rinkeby.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a",
+            [Chains.mainnet.id]: "https://mainnet.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a",
+            //[Chains.rinkeby.id]: "https://rinkeby.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a",
             //[Chains.arbitrumOne.id]: "https://arb-mainnet.g.alchemy.com/v2/qu4tZ0JUekqqwtcDowbfel-s4S8Z60Oj",
         },
     },
@@ -54,7 +54,8 @@ const WalletContext = createContext<WalletStates>({
     switchNetwork: undefined,
     signer: undefined,
     //provider: ArbitrumOneProvider,
-    provider: RinkebyProvider,
+    //provider: RinkebyProvider,
+    provider: MainnetProvider,
 });
 
 // Persistent states
@@ -79,7 +80,7 @@ const getProvider = (config: { chainId?: number }) => {
         case Chains.rinkeby.id:
             return RinkebyProvider;
         default:
-            return RinkebyProvider;
+            return MainnetProvider;
     }
 };
 
@@ -138,6 +139,7 @@ const WalletGlobalState: FunctionComponent<WalletGlobalStateProps> = ({ children
             console.log(metamaskState);
         }
         // Run the disconnect; esp for wallet connect
+        disconnect();
         disconnect();
     };
 
