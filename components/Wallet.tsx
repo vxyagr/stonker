@@ -26,6 +26,7 @@ export const WCConnector = new WalletConnectConnector({
         qrcode: true,
         rpc: {
             [Chains.mainnet.id]: "https://mainnet.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a",
+            [Chains.polygonMainnet.id]: "https://polygon-mainnet.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a",
             //[Chains.rinkeby.id]: "https://rinkeby.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a",
             //[Chains.arbitrumOne.id]: "https://arb-mainnet.g.alchemy.com/v2/qu4tZ0JUekqqwtcDowbfel-s4S8Z60Oj",
         },
@@ -36,6 +37,7 @@ export const ArbitrumOneProvider = new providers.JsonRpcProvider("https://arb-ma
 export const KovanProvider = new providers.JsonRpcProvider("https://eth-kovan.alchemyapi.io/v2/qLbNN95iUDTpQqbm5FzgaSPrPJ908VD-", Chains.kovan.id);
 export const RinkebyProvider = new providers.JsonRpcBatchProvider("https://rinkeby.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a");
 export const MainnetProvider = new providers.JsonRpcBatchProvider("https://mainnet.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a");
+export const PolygonProvider = new providers.JsonRpcBatchProvider("https://polygon-mainnet.infura.io/v3/75f2e7e272c4462f8ecd289616446a3a");
 export type WalletStates = {
     account: string | undefined;
     chain: { unsupported: Boolean; chain: Chain };
@@ -73,6 +75,8 @@ const getProvider = (config: { chainId?: number }) => {
     switch (config.chainId) {
         case Chains.mainnet.id:
             return MainnetProvider;
+        case Chains.polygonMainnet.id:
+            return PolygonProvider;
         case Chains.kovan.id:
             return KovanProvider;
         case Chains.arbitrumOne.id:
