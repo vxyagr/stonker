@@ -51,7 +51,7 @@ const BurgerMenu = ({ open }: { open: any }) => {
                         </Link>
                     </li>
                     <li className="pointer border-b border-black border-opacity-10">
-                        <Link href="https://stonker-dividend.vercel.app/dashboard">
+                        <Link href="https://dashboard.stonker.club">
                             <p className="relative block flex w-full items-center py-3 text-black" style={{ opacity: 1, cursor: "pointer" }}>
                                 DASHBOARD{" "}
                             </p>

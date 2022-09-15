@@ -75,7 +75,7 @@ const Navigation: FunctionComponent<NavigationProps> = (props) => {
                         </Link>
                     </li>
                     <li className="cursor-pointer">
-                        <Link href="https://stonker-dividend.vercel.app/dashboard">
+                        <Link href="https://dashboard.stonker.club">
                             <p
                                 className="
                               first::pt-0 
