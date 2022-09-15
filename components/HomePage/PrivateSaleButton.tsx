@@ -21,7 +21,7 @@ const Resources: FunctionComponent<ResourcesProps> = ({}) => {
                 <img src="sample.jfif" width={60} height={60} />
                 <Link href="/mint">
                     <a className="">
-                        <span className="leading-0 h-14 pl-8 align-middle text-base font-semibold  leading-none text-gray-light-12 dark:text-gray-dark-12">PRIVATE SALE IS LIVE </span>
+                        <span className="leading-0 h-14 pl-8 align-middle text-base font-semibold  leading-none text-gray-light-12 dark:text-gray-dark-12">MINT NOW! </span>
                     </a>
                 </Link>
             </div>
