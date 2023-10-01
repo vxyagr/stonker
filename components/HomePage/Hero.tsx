@@ -34,7 +34,8 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
     }
     useEffect(() => {
         setTimenow(getTimeCategory().toString());
-    });
+        console.log("timne " + timenow);
+    }, []);
     return (
         <div className="relative h-full w-full justify-center overflow-hidden">
             <img src={timenow} className="w-full lg:hidden" />
