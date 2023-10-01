@@ -2,6 +2,7 @@ import type { FunctionComponent } from "react";
 // Import components
 import ButtonLaunchGradient from "../Buttons/LaunchGradient";
 import PrivateSale from "./PrivateSale";
+import { useEffect, useState } from "react";
 
 /**
  * HeroProps is a React Component properties that passed to React Component Hero
@@ -14,9 +15,29 @@ type HeroProps = {};
  * @link https://fettblog.eu/typescript-react/components/#functional-components
  */
 const Hero: FunctionComponent<HeroProps> = ({}) => {
+    const [timenow, setTimenow] = useState("stonker_morning.jpg");
+    function getTimeCategory() {
+        const currentUTC = new Date().getUTCHours();
+
+        if (currentUTC >= 8 && currentUTC < 12) {
+            return "stonker_morning.jpg";
+        } else if (currentUTC >= 12 && currentUTC < 17) {
+            return "stonker_day.jpg";
+        } else if (currentUTC >= 17 && currentUTC < 19) {
+            return "stonker_evening.jpg";
+        } else if (currentUTC >= 19 && currentUTC < 24) {
+            return "stonker_night.jpg";
+        }
+
+        // Handle cases outside the specified ranges (optional)
+        return 0; // Or any other value you prefer for cases outside the ranges
+    }
+    useEffect(() => {
+        setTimenow(getTimeCategory().toString());
+    });
     return (
         <div className="relative h-full w-full justify-center overflow-hidden">
-            <img src="stonker_morning.jpg" className="w-full lg:hidden" />
+            <img src={timenow} className="w-full lg:hidden" />
             <img src="stonker_hero.jpg" className="absolute top-0 left-0 hidden w-full min-w-[1200px] md:hidden lg:flex" />
             <div className="relative z-20 m-auto flex hidden  max-w-screen-md flex-col items-center gap-8 px-4 py-32 text-center align-middle ">
                 <div className="flex  items-center">
