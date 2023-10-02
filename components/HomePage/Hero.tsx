@@ -19,15 +19,17 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
     function getTimeCategory() {
         const currentUTC = new Date().getUTCHours();
 
-        if (currentUTC >= 8 && currentUTC < 12) {
+        if (currentUTC >= 0 && currentUTC < 12) {
             return "stonker_morning.jpg";
         } else if (currentUTC >= 12 && currentUTC < 17) {
             return "stonker_day.jpg";
         } else if (currentUTC >= 17 && currentUTC < 19) {
             return "stonker_evening.jpg";
-        } else if (currentUTC >= 19 && currentUTC < 24) {
+        } else if (currentUTC >= 19 && currentUTC <= 24) {
             return "stonker_night.jpg";
         }
+
+        console.log("utc " + currentUTC);
 
         // Handle cases outside the specified ranges (optional)
         return 0; // Or any other value you prefer for cases outside the ranges
