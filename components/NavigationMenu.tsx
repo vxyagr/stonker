@@ -75,7 +75,7 @@ const Navigation: FunctionComponent<NavigationProps> = (props) => {
                         </Link>
                     </li>
                     <li className="cursor-pointer">
-                        <Link href="https://dashboard.stonker.club">
+                        <a target="_blank" href="https://dashboard.stonker.club" rel="noreferrer">
                             <p
                                 className="
                               first::pt-0 
@@ -83,7 +83,7 @@ const Navigation: FunctionComponent<NavigationProps> = (props) => {
                             >
                                 Dashboard
                             </p>
-                        </Link>
+                        </a>
                     </li>
                     <li className="cursor-pointer">
                         <Link href="/about">
