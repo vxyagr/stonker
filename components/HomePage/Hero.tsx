@@ -22,13 +22,13 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
         currentDT.toLocaleTimeString("en-US", { timeZone: "America/New_York" });
         const currentUTC = parseInt(currentDT.toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "numeric", hour12: true }));
 
-        if (currentUTC >= 7 && currentUTC < 11) {
+        if (currentUTC >= 5 && currentUTC < 11) {
             return "stonker_morning.jpg";
         } else if (currentUTC >= 11 && currentUTC < 17) {
             return "stonker_day.jpg";
         } else if (currentUTC >= 17 && currentUTC < 19) {
             return "stonker_evening.jpg";
-        } else if ((currentUTC >= 19 && currentUTC <= 24) || currentUTC < 7) {
+        } else if ((currentUTC >= 19 && currentUTC <= 24) || currentUTC < 5) {
             return "stonker_night.jpg";
         }
 
