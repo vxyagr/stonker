@@ -16,16 +16,17 @@ type HeroProps = {};
  */
 const Hero: FunctionComponent<HeroProps> = ({}) => {
     const [timenow, setTimenow] = useState("stonker_morning.jpg");
+    const [appLoaded, setAppLoaded] = useState(false);
     function getTimeCategory() {
         const currentUTC = new Date().getUTCHours();
 
-        if (currentUTC >= 0 && currentUTC < 12) {
+        if (currentUTC >= 7 && currentUTC < 11) {
             return "stonker_morning.jpg";
-        } else if (currentUTC >= 12 && currentUTC < 17) {
+        } else if (currentUTC >= 11 && currentUTC < 17) {
             return "stonker_day.jpg";
         } else if (currentUTC >= 17 && currentUTC < 19) {
             return "stonker_evening.jpg";
-        } else if (currentUTC >= 19 && currentUTC <= 24) {
+        } else if ((currentUTC >= 19 && currentUTC <= 24) || currentUTC < 7) {
             return "stonker_night.jpg";
         }
 
@@ -35,9 +36,16 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
         return 0; // Or any other value you prefer for cases outside the ranges
     }
     useEffect(() => {
-        setTimenow(getTimeCategory().toString());
-        console.log("timne " + timenow);
-    }, []);
+        if (!appLoaded) {
+            setTimenow(getTimeCategory().toString());
+
+            //console.log("timne " + timenow);
+            var currentUTC = new Date().getUTCHours();
+            // console.log("curr " + currentUTC);
+        } else {
+            setAppLoaded(true);
+        }
+    }, [appLoaded]);
     return (
         <div className="relative h-full w-full justify-center overflow-hidden">
             <img src={timenow} className="w-full lg:hidden" />
