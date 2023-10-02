@@ -15,10 +15,12 @@ type HeroProps = {};
  * @link https://fettblog.eu/typescript-react/components/#functional-components
  */
 const Hero: FunctionComponent<HeroProps> = ({}) => {
-    const [timenow, setTimenow] = useState("stonker_morning.jpg");
+    const [timenow, setTimenow] = useState("");
     const [appLoaded, setAppLoaded] = useState(false);
     function getTimeCategory() {
-        const currentUTC = new Date().getUTCHours();
+        var currentDT = new Date();
+        currentDT.toLocaleTimeString("en-US", { timeZone: "America/New_York" });
+        const currentUTC = parseInt(currentDT.toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "numeric", hour12: true }));
 
         if (currentUTC >= 7 && currentUTC < 11) {
             return "stonker_morning.jpg";
@@ -30,18 +32,15 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
             return "stonker_night.jpg";
         }
 
-        console.log("utc " + currentUTC);
+        //console.log("utc " + currentUTC);
 
         // Handle cases outside the specified ranges (optional)
         return 0; // Or any other value you prefer for cases outside the ranges
     }
+
     useEffect(() => {
         if (!appLoaded) {
             setTimenow(getTimeCategory().toString());
-
-            //console.log("timne " + timenow);
-            var currentUTC = new Date().getUTCHours();
-            // console.log("curr " + currentUTC);
         } else {
             setAppLoaded(true);
         }
