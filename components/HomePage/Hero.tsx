@@ -20,8 +20,8 @@ const Hero: FunctionComponent<HeroProps> = ({}) => {
     function getTimeCategory() {
         var currentDT = new Date();
         currentDT.toLocaleTimeString("en-US", { timeZone: "America/New_York" });
-        const currentUTC = parseInt(currentDT.toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "numeric", hour12: true }));
-
+        const currentUTC = parseInt(currentDT.toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "numeric", hour12: false }));
+        console.log("utc " + currentUTC);
         if (currentUTC >= 5 && currentUTC < 11) {
             return "stonker_morning.jpg";
         } else if (currentUTC >= 11 && currentUTC < 17) {
