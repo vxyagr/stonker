@@ -19,7 +19,7 @@ const HomePageMeta: FunctionComponent<HomePageMetaProps> = ({}) => {
             <meta property="og:type" content="website" />
             <meta property="og:title" content="Stonker Trading Club" />
             <meta property="og:description" content="A simple way to invest on treasury management with NFT as ownership and tradeable token" />
-            <meta property="og:image" content="https://stonker.club/stonker_preview.png" />
+            <meta property="og:image" content="https://stonker.club/stonker_hero.jpg" />
 
             {/* <!-- Twitter Meta Tags --> */}
             <meta name="twitter:card" content="summary_large_image" />
@@ -27,7 +27,7 @@ const HomePageMeta: FunctionComponent<HomePageMetaProps> = ({}) => {
             <meta property="twitter:url" content="https://twitter.com/stonkerclub" />
             <meta name="twitter:title" content="Stonker Trading Club" />
             <meta name="twitter:description" content="A simple way to invest on treasury management with NFT as ownership and tradeable token" />
-            <meta name="twitter:image" content="" />
+            <meta name="twitter:image" content="https://stonker.club/stonker_hero.jpg" />
         </>
     );
 };
